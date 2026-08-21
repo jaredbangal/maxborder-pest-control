@@ -5,7 +5,6 @@ import { cn } from '@/lib/cn';
 import { useLockBodyScroll } from '@/hooks';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
-import { ThemeToggle } from './ThemeToggle';
 import { NAV_LINKS, PHONE, PHONE_HREF } from '@/lib/constants';
 
 /**
@@ -91,18 +90,15 @@ export const MobileNav = ({ open, onClose }: { open: boolean; onClose: () => voi
         <div className="flex items-center justify-between border-b border-ink/12 px-6 py-5">
           <Logo showTagline={false} />
 
-          <span className="flex items-center gap-2">
-            <ThemeToggle />
-            <button
-              ref={closeRef}
+          <button
+            ref={closeRef}
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-              className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-ink/15 transition-colors duration-[var(--dur-fast)] hover:border-ink hover:bg-ink hover:text-cream"
-            >
-              <X className="size-5" aria-hidden="true" />
-            </button>
-          </span>
+            className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-ink/15 transition-colors duration-[var(--dur-fast)] hover:border-ink hover:bg-ink hover:text-cream"
+          >
+            <X className="size-5" aria-hidden="true" />
+          </button>
         </div>
 
         <nav className="flex-1 overflow-y-auto px-6 py-4" aria-label="Mobile">

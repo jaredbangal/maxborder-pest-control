@@ -17,7 +17,7 @@ export const Logo = ({ variant = 'default', className, showTagline = true }: Pro
   const taglineColor = variant === 'light' ? 'text-on-inverse/60' : 'text-muted';
 
   return (
-    <span className={cn('inline-flex flex-col leading-none', className)}>
+    <span className={cn('inline-flex flex-col items-center leading-none', className)}>
       <span
         className="font-display text-[1.35rem] tracking-[-0.02em] sm:text-[1.5rem]"
         aria-hidden="true"
@@ -30,6 +30,11 @@ export const Logo = ({ variant = 'default', className, showTagline = true }: Pro
         <span
           className={cn(
             'mt-[0.3em] font-heading text-[0.5rem] font-700 uppercase tracking-[0.42em] sm:text-[0.55rem]',
+            // Letter-spacing also applies AFTER the final letter, so the text
+            // box is one full tracking unit wider than the glyphs. Centering
+            // the box would leave the word visibly left of centre; the negative
+            // right margin removes that phantom width so it centres true.
+            '-mr-[0.42em]',
             taglineColor
           )}
           aria-hidden="true"

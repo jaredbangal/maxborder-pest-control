@@ -82,8 +82,6 @@ export const Header = () => {
               {PHONE}
             </a>
 
-            <ThemeToggle />
-
             <span className="hidden sm:block">
               <Button to="/contact" size="sm">
                 Free Quote
@@ -107,6 +105,10 @@ export const Header = () => {
             >
               <Menu className="size-5" aria-hidden="true" />
             </button>
+
+            {/* Last in the row on purpose: keeps the toggle pinned to the
+                top-right corner at every breakpoint, away from the wordmark. */}
+            <ThemeToggle className="ml-1" />
           </div>
         </div>
 
