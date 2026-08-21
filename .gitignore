@@ -10,3 +10,5 @@ coverage/
 .vite/
 
 tsconfig.tsbuildinfo
+.vercel
+.env*
