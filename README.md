@@ -1,5 +1,8 @@
 # Maxborder Pest Control
 
+**Live:** https://maxborder-pest-control.vercel.app
+**Repo:** https://github.com/jaredbangal/maxborder-pest-control (private)
+
 Marketing site and lead-capture system for Maxborder Pest Control.
 React + Vite frontend, Node/Express API, SQLite persistence.
 
@@ -190,7 +193,19 @@ Verified with automated sweeps, not assumed:
 
 ## Deployment
 
-Pushed to Vercel from the repo root. `vercel.json` builds the client to
+Live at **https://maxborder-pest-control.vercel.app**, deployed from the repo
+root. The GitHub repo is connected, so pushes to `main` redeploy automatically;
+`vercel --prod` deploys manually.
+
+Two things that will bite on a fresh clone if you touch them:
+
+- `api/index.mjs` **must** keep the `.mjs` extension. The repo-root
+  package.json has no `"type": "module"`, so a `.js` file there loads as
+  CommonJS and every `/api` request fails.
+- The CSP for the static HTML lives in `vercel.json` with literal script
+  hashes. `npm run build` verifies them and fails with the correct value if the
+  inline theme script changes.
+ `vercel.json` builds the client to
 `client/dist` and serves it statically, routes `/api/*` to the Express app via
 `api/index.js`, and rewrites everything else to `index.html` for SPA routing.
 
