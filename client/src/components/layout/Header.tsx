@@ -36,13 +36,9 @@ export const Header = () => {
       >
         {!scrolled && <AnnouncementBar />}
 
-        {/*
-          Utility bar. Deliberately full-bleed rather than inside the centred
-          max-width container: the toggle has to reach the actual top-right
-          corner of the viewport. Constrained to the container it drifted
-          hundreds of pixels inward on a wide monitor and stopped reading as a
-          corner control at all.
-        */}
+        {/* Utility bar — collapses on scroll to keep the sticky header compact.
+            Secondary links only: nothing essential lives here, because anything
+            in this row disappears the moment the page scrolls. */}
         <div
           className={cn(
             'hidden border-b border-ink/10 transition-[height,opacity] duration-[var(--dur-base)] lg:block',
@@ -55,42 +51,34 @@ export const Header = () => {
               Licensed &amp; insured · Free return visits · Service within 48 hours
             </p>
 
-            <div className="flex items-center gap-6">
-              <nav aria-label="Secondary">
-                <ul className="flex items-center gap-5">
-                  {UTILITY_LINKS.map((link) => (
-                    <li key={link.to}>
-                      <NavLink
-                        to={link.to}
-                        className={({ isActive }) =>
-                          cn(
-                            'text-[0.76rem] transition-colors duration-[var(--dur-fast)]',
-                            isActive ? 'text-ink' : 'text-muted hover:text-ink'
-                          )
-                        }
-                      >
-                        {link.label}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-
-              <a
-                href={PHONE_HREF}
-                className="flex items-center gap-2 font-heading text-[0.8rem] font-700 text-ink transition-colors duration-[var(--dur-fast)] hover:text-orange"
-              >
-                <Phone className="size-3.5 text-orange" aria-hidden="true" />
-                {PHONE}
-              </a>
-
-              <ThemeToggle className="size-9" />
-            </div>
+            <nav aria-label="Secondary">
+              <ul className="flex items-center gap-5">
+                {UTILITY_LINKS.map((link) => (
+                  <li key={link.to}>
+                    <NavLink
+                      to={link.to}
+                      className={({ isActive }) =>
+                        cn(
+                          'text-[0.76rem] transition-colors duration-[var(--dur-fast)]',
+                          isActive ? 'text-ink' : 'text-muted hover:text-ink'
+                        )
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </div>
 
-        {/* Main row: logo left, nav centred, CTA right. */}
-        <div className="mx-auto flex max-w-[92rem] items-center gap-6 px-5 sm:px-8 lg:px-12">
+        {/*
+          Main row. Full-bleed rather than a centred max-width box so the logo
+          and the toggle sit at the real edges of the screen — boxed, the toggle
+          drifted hundreds of pixels inward on a wide monitor.
+        */}
+        <div className="flex items-center gap-6 px-5 sm:px-8 lg:px-12">
           <Link
             to="/"
             aria-label="Maxborder Pest Control — home"
@@ -103,7 +91,7 @@ export const Header = () => {
           </Link>
 
           <nav className="mx-auto hidden lg:block" aria-label="Primary">
-            <ul className="flex items-center gap-7 xl:gap-9">
+            <ul className="flex items-center gap-10 xl:gap-14">
               {NAV_LINKS.map((link) => (
                 <li key={link.to}>
                   <NavLink
@@ -111,7 +99,7 @@ export const Header = () => {
                     data-active={pathname.startsWith(link.to)}
                     className={({ isActive }) =>
                       cn(
-                        'link-underline whitespace-nowrap py-2 font-heading text-[0.8rem] font-700 uppercase tracking-[0.1em]',
+                        'link-underline whitespace-nowrap py-2 font-heading text-[0.85rem] font-700 uppercase tracking-[0.12em]',
                         'transition-colors duration-[var(--dur-fast)]',
                         isActive ? 'text-ink' : 'text-muted hover:text-ink'
                       )
@@ -125,6 +113,14 @@ export const Header = () => {
           </nav>
 
           <div className="ml-auto flex items-center gap-3 lg:ml-0">
+            <a
+              href={PHONE_HREF}
+              className="hidden items-center gap-2 font-heading text-[0.85rem] font-700 text-ink transition-colors duration-[var(--dur-fast)] hover:text-orange xl:flex"
+            >
+              <Phone className="size-4 text-orange" aria-hidden="true" />
+              {PHONE}
+            </a>
+
             <span className="hidden sm:block">
               <Button to="/contact" size="sm">
                 Free Quote
@@ -149,9 +145,9 @@ export const Header = () => {
               <Menu className="size-5" aria-hidden="true" />
             </button>
 
-            {/* Below lg the utility bar is hidden, so the toggle lives here —
-                still the last item, still the top-right corner. */}
-            <ThemeToggle className="lg:hidden" />
+            {/* In the main row on purpose: this row never collapses, so the
+                day/night switch stays reachable at every scroll position. */}
+            <ThemeToggle />
           </div>
         </div>
 
