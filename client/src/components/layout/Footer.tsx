@@ -18,6 +18,9 @@ const SERVICE_LINKS = [
 ];
 
 const COMPANY_LINKS = [
+  { to: '/residential', label: 'Residential' },
+  { to: '/commercial', label: 'Commercial' },
+  { to: '/service-areas', label: 'Service Areas' },
   { to: '/about', label: 'About Us' },
   { to: '/plans', label: 'Plans & Pricing' },
   { to: '/pests', label: 'Pest Library' },

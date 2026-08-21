@@ -7,6 +7,9 @@ import { PageError, PageLoader } from '@/components/ui/States';
 import { SiteProvider, useSite } from '@/lib/SiteContext';
 import { Home } from '@/pages/Home';
 import { Services } from '@/pages/Services';
+import { Residential } from '@/pages/Residential';
+import { Commercial } from '@/pages/Commercial';
+import { ServiceAreas } from '@/pages/ServiceAreas';
 import { ServiceDetail } from '@/pages/ServiceDetail';
 import { Plans } from '@/pages/Plans';
 import { Pests } from '@/pages/Pests';
@@ -27,6 +30,9 @@ const Shell = () => {
       <main id="main" className="pb-20 sm:pb-0">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/residential" element={<Residential />} />
+          <Route path="/commercial" element={<Commercial />} />
+          <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/plans" element={<Plans />} />

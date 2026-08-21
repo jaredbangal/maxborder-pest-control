@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn';
 import { useLockBodyScroll } from '@/hooks';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
-import { NAV_LINKS, PHONE, PHONE_HREF } from '@/lib/constants';
+import { NAV_LINKS, PHONE, PHONE_HREF, UTILITY_LINKS } from '@/lib/constants';
 
 /**
  * Full-screen mobile drawer with a proper focus trap: focus moves in on open,
@@ -121,6 +121,26 @@ export const MobileNav = ({ open, onClose }: { open: boolean; onClose: () => voi
                     transform: open ? 'none' : 'translateX(16px)',
                     transition: `opacity 400ms var(--ease-out-expo) ${open ? 120 + i * 45 : 0}ms, transform 400ms var(--ease-out-expo) ${open ? 120 + i * 45 : 0}ms, color var(--dur-fast)`,
                   }}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          <ul className="mt-6 space-y-1 border-t border-ink/10 pt-5">
+            {UTILITY_LINKS.map((link) => (
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    cn(
+                      'flex min-h-[2.75rem] items-center text-[0.95rem]',
+                      'transition-colors duration-[var(--dur-fast)]',
+                      isActive ? 'text-orange' : 'text-muted hover:text-ink'
+                    )
+                  }
                 >
                   {link.label}
                 </NavLink>

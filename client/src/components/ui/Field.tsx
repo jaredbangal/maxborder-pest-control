@@ -170,17 +170,24 @@ export const Honeypot = ({
 }: {
   value: string;
   onChange: (v: string) => void;
-}) => (
-  <div className="hp-field" aria-hidden="true">
-    <label htmlFor="company-website">Company website (leave blank)</label>
-    <input
-      id="company-website"
-      name="company"
-      type="text"
-      tabIndex={-1}
-      autoComplete="off"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-    />
-  </div>
-);
+}) => {
+  // Generated, not hardcoded: pages that render two forms (a section form plus
+  // the CTA banner) would otherwise emit duplicate ids and break the label
+  // association on both.
+  const id = useId();
+
+  return (
+    <div className="hp-field" aria-hidden="true">
+      <label htmlFor={id}>Company website (leave blank)</label>
+      <input
+        id={id}
+        name="company"
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </div>
+  );
+};
