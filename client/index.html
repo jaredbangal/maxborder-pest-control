@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#F4EEE0" />
+
+    <title>Maxborder Pest Control — Pests Stop At The Border</title>
+    <meta
+      name="description"
+      content="Licensed, guaranteed pest control for homes and businesses across Texas. Service within 48 hours, free return visits, and a treated perimeter that actually holds. Plans from $49/mo."
+    />
+    <link rel="canonical" href="https://maxborderpest.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Maxborder Pest Control" />
+    <meta property="og:title" content="Maxborder Pest Control — Pests Stop At The Border" />
+    <meta
+      property="og:description"
+      content="Service within 48 hours. Free return visits, always. Licensed technicians and a treated perimeter that holds. Plans from $49/mo."
+    />
+    <meta property="og:url" content="https://maxborderpest.com/" />
+    <meta property="og:image" content="https://maxborderpest.com/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <script>
+      // Runs before first paint. Reads the saved choice (or falls back to the
+      // OS setting) and stamps <html> so the correct palette is already in
+      // place when the page renders — no flash of the wrong theme.
+      (function () {
+        try {
+          var saved = localStorage.getItem('mb-theme');
+          var dark =
+            saved === 'dark' ||
+            (saved !== 'light' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (saved === 'light' || saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute('content', dark ? '#0e1720' : '#f4eee0');
+        } catch (e) {
+          /* storage blocked — fall through to the media query */
+        }
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Archivo+Black&family=Karla:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "PestControlService",
+        "name": "Maxborder Pest Control",
+        "description": "Licensed residential and commercial pest control across Texas.",
+        "telephone": "+1-888-629-7378",
+        "email": "hello@maxborderpest.com",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1420 Ironwood Ave, Suite 300",
+          "addressLocality": "Austin",
+          "addressRegion": "TX",
+          "postalCode": "78701",
+          "addressCountry": "US"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "3800"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- With JavaScript disabled the SPA cannot mount, so give visitors the two
+         things they came for: the phone number and the address. -->
+    <noscript>
+      <div style="max-width:34rem;margin:4rem auto;padding:0 1.5rem;font-family:Karla,system-ui,sans-serif;color:#12203a">
+        <p style="font-family:'Archivo Black',sans-serif;font-size:1.6rem;margin:0 0 .5rem">
+          <span style="color:#c2410c">MAX</span>BORDER
+        </p>
+        <p style="letter-spacing:.4em;font-size:.65rem;font-weight:700;margin:0 0 2rem">PEST CONTROL</p>
+        <h1 style="font-family:'Archivo Black',sans-serif;font-size:2rem;line-height:1.1;margin:0 0 1rem">
+          Pests stop at the border.
+        </h1>
+        <p style="line-height:1.6;margin:0 0 1.5rem">
+          This site needs JavaScript to run. You can still reach us directly &mdash;
+          licensed pest control across Texas, service within 48 hours.
+        </p>
+        <p style="margin:0 0 .5rem">
+          <a href="tel:+18886297378" style="color:#c2410c;font-weight:700;font-size:1.25rem">(888) 629-7378</a>
+        </p>
+        <p style="margin:0"><a href="mailto:hello@maxborderpest.com" style="color:#12203a">hello@maxborderpest.com</a></p>
+        <p style="margin:1.5rem 0 0;color:#4e525a">1420 Ironwood Ave, Suite 300, Austin, TX 78701</p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

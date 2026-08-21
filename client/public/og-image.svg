@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#F4EEE0"/>
+  <circle cx="1010" cy="315" r="210" fill="none" stroke="#C2410C" stroke-width="3" stroke-dasharray="12 14" opacity="0.5"/>
+  <circle cx="1010" cy="315" r="170" fill="none" stroke="#12203A" stroke-width="2" stroke-dasharray="4 10" opacity="0.25"/>
+  <g transform="translate(905 250)">
+    <path d="M20 90h170v120H20z" fill="#FAF6EC" stroke="#12203A" stroke-width="5"/>
+    <path d="M0 95 105 15l105 80z" fill="#C2410C" stroke="#12203A" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M85 150h40v60H85z" fill="#12203A"/>
+  </g>
+  <text x="90" y="250" font-family="Archivo Black, Arial Black, sans-serif" font-size="76" font-weight="900" fill="#C2410C">MAX<tspan fill="#12203A">BORDER</tspan></text>
+  <text x="94" y="292" font-family="Archivo, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="11" fill="#55524B">PEST CONTROL</text>
+  <text x="90" y="400" font-family="Archivo Black, Arial Black, sans-serif" font-size="58" font-weight="900" fill="#12203A">Pests stop at</text>
+  <text x="90" y="466" font-family="Archivo Black, Arial Black, sans-serif" font-size="58" font-weight="900" fill="#12203A">the <tspan fill="#C2410C">border</tspan>.</text>
+  <rect x="90" y="510" width="90" height="4" fill="#C2410C"/>
+  <text x="90" y="558" font-family="Archivo, Arial, sans-serif" font-size="24" fill="#55524B">48-hour service · Free return visits · Plans from $49/mo</text>
+</svg>
