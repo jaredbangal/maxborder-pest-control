@@ -9,7 +9,7 @@ import { usePrefersReducedMotion } from '@/hooks';
 import type { PestCategory } from '@/lib/types';
 
 /** How far the card leans, in degrees, at the very corner. */
-const MAX_TILT = 9;
+const MAX_TILT = 7;
 
 /**
  * Pointer-tracking 3D tilt. Reads the pointer position relative to the card
@@ -42,7 +42,7 @@ const useTilt = () => {
         setStyle({
           transform:
             `perspective(1000px) rotateX(${(-py * MAX_TILT).toFixed(2)}deg) ` +
-            `rotateY(${(px * MAX_TILT).toFixed(2)}deg) translate3d(0,-6px,0) scale(1.015)`,
+            `rotateY(${(px * MAX_TILT).toFixed(2)}deg) translate3d(0,-4px,0) scale(1.02)`,
           // No transition while tracking, so the card follows the pointer 1:1.
           transition: 'none',
         });
@@ -81,47 +81,42 @@ const CategoryCard = ({ category }: { category: PestCategory }) => {
       <Link
         to={`/services/${category.serviceSlug}`}
         className={cn(
-          'corner-ticks flex h-full flex-col border-2 border-ink/12 bg-paper p-8 sm:p-9',
+          'corner-ticks flex h-full flex-col border-2 border-ink/12 bg-paper p-6',
           'transition-[border-color,box-shadow] duration-[var(--dur-base)]',
           'hover:border-ink hover:shadow-[var(--shadow-lg)]'
         )}
       >
         <span
           className={cn(
-            'grid size-16 place-items-center rounded-full bg-orange-tint text-orange',
+            'grid size-12 place-items-center rounded-full bg-orange-tint text-orange',
             'transition-[background-color,color] duration-[var(--dur-base)]',
             'group-hover:bg-orange group-hover:text-white'
           )}
         >
-          <Icon name={category.icon} className="size-7" strokeWidth={1.5} />
+          <Icon name={category.icon} className="size-5" strokeWidth={1.75} />
         </span>
 
-        <p className="eyebrow mt-7">{category.count}</p>
+        <p className="eyebrow mt-5">{category.count}</p>
 
-        <h3 className="mt-2 font-heading text-[1.5rem] font-800 leading-tight sm:text-[1.75rem]">
+        <h3 className="mt-1.5 font-heading text-[1.15rem] font-800 leading-tight">
           {category.name}
         </h3>
 
-        <p className="mt-4 flex-1 text-[0.98rem] leading-relaxed text-muted">{category.blurb}</p>
+        <p className="mt-2.5 flex-1 text-[0.88rem] leading-relaxed text-muted">{category.blurb}</p>
 
-        <p className="mt-6 text-[0.85rem] leading-relaxed text-muted">
-          <span className="text-ink">Includes: </span>
-          {category.examples.join(', ')}
-        </p>
-
-        <span className="mt-7 flex items-center justify-between border-t border-ink/12 pt-5">
-          <span className="font-heading text-[0.76rem] font-700 uppercase tracking-[0.12em] text-ink">
+        <span className="mt-5 flex items-center justify-between border-t border-ink/12 pt-4">
+          <span className="font-heading text-[0.7rem] font-700 uppercase tracking-[0.12em] text-ink">
             See the plan
           </span>
           <span
             aria-hidden="true"
             className={cn(
-              'grid size-10 place-items-center rounded-full border-2 border-ink/15',
+              'grid size-8 place-items-center rounded-full border-2 border-ink/15',
               'transition-[background-color,border-color,color] duration-[var(--dur-base)]',
               'group-hover:border-ink group-hover:bg-ink group-hover:text-cream'
             )}
           >
-            <ArrowUpRight className="size-4" strokeWidth={2.5} />
+            <ArrowUpRight className="size-3.5" strokeWidth={2.5} />
           </span>
         </span>
       </Link>
@@ -140,10 +135,10 @@ export const PestCategories = ({ categories }: { categories: PestCategory[] }) =
           in four groups.
         </>
       }
-      intro="One seasonal plan covers all of them. Pick the group that matches what you are seeing and we will show you the plan that handles it."
+      intro="One seasonal plan covers all of them — ants, roaches, rodents, mosquitoes, termites and the rest. Pick the group that matches what you are seeing."
     />
 
-    <ul className="mt-14 grid gap-6 sm:grid-cols-2">
+    <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {categories.map((category, i) => (
         <Reveal as="li" key={category.slug} delay={i * 90} className="[perspective:1000px]">
           <CategoryCard category={category} />

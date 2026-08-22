@@ -39,37 +39,43 @@ export const Header = () => {
         {/* Utility bar — collapses on scroll to keep the sticky header compact.
             Secondary links only: nothing essential lives here, because anything
             in this row disappears the moment the page scrolls. */}
-        <div
-          className={cn(
-            'hidden border-b border-ink/10 transition-[height,opacity] duration-[var(--dur-base)] lg:block',
-            scrolled ? 'pointer-events-none h-0 overflow-hidden opacity-0' : 'opacity-100'
-          )}
-        >
-          <div className="flex items-center justify-between px-5 py-2 sm:px-8 lg:px-12">
+        <div className="hidden border-b border-ink/10 lg:block">
+          <div
+            className={cn(
+              'flex items-center justify-between px-5 transition-[padding] duration-[var(--dur-base)] sm:px-8 lg:px-12',
+              scrolled ? 'py-1' : 'py-2'
+            )}
+          >
             <p className="flex items-center gap-2 text-[0.76rem] text-muted">
               <ShieldCheck className="size-3.5 text-orange" aria-hidden="true" />
               Licensed &amp; insured · Free return visits · Service within 48 hours
             </p>
 
-            <nav aria-label="Secondary">
-              <ul className="flex items-center gap-5">
-                {UTILITY_LINKS.map((link) => (
-                  <li key={link.to}>
-                    <NavLink
-                      to={link.to}
-                      className={({ isActive }) =>
-                        cn(
-                          'text-[0.76rem] transition-colors duration-[var(--dur-fast)]',
-                          isActive ? 'text-ink' : 'text-muted hover:text-ink'
-                        )
-                      }
-                    >
-                      {link.label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <div className="flex items-center gap-5">
+              <nav aria-label="Secondary">
+                <ul className="flex items-center gap-5">
+                  {UTILITY_LINKS.map((link) => (
+                    <li key={link.to}>
+                      <NavLink
+                        to={link.to}
+                        className={({ isActive }) =>
+                          cn(
+                            'text-[0.76rem] transition-colors duration-[var(--dur-fast)]',
+                            isActive ? 'text-ink' : 'text-muted hover:text-ink'
+                          )
+                        }
+                      >
+                        {link.label}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              {/* Top-right corner of the page. This bar deliberately does NOT
+                  collapse on scroll — it did once, and took the toggle with it. */}
+              <ThemeToggle className="size-9" />
+            </div>
           </div>
         </div>
 
@@ -145,9 +151,9 @@ export const Header = () => {
               <Menu className="size-5" aria-hidden="true" />
             </button>
 
-            {/* In the main row on purpose: this row never collapses, so the
-                day/night switch stays reachable at every scroll position. */}
-            <ThemeToggle />
+            {/* Below lg the utility bar is hidden, so the toggle lives here.
+                Exactly one of the two is ever displayed. */}
+            <ThemeToggle className="lg:hidden" />
           </div>
         </div>
 

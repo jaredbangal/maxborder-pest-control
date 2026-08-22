@@ -3,7 +3,6 @@ import { PageHero } from '@/components/layout/PageHero';
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { StatsBand } from '@/components/sections/StatsBand';
-import { WhyUs } from '@/components/sections/WhyUs';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { CtaBanner } from '@/components/sections/CtaBanner';
 import { useSite } from '@/lib/SiteContext';
@@ -91,8 +90,6 @@ export const About = () => {
           </ol>
         </div>
       </Section>
-
-      <WhyUs />
       <Testimonials items={testimonials} />
       <CtaBanner services={services} />
     </>
