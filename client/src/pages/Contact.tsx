@@ -45,7 +45,7 @@ export const Contact = () => {
                 <ul className="mt-5 space-y-5">
                   <li>
                     <a href={PHONE_HREF} className="group flex items-start gap-4">
-                      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-orange-tint text-orange transition-colors duration-[var(--dur-base)] group-hover:bg-orange group-hover:text-white">
+                      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-orange-tint text-orange transition-colors duration-[var(--dur-base)] group-hover:bg-orange group-hover:text-on-orange">
                         <Phone className="size-4" aria-hidden="true" />
                       </span>
                       <span>
@@ -59,7 +59,7 @@ export const Contact = () => {
 
                   <li>
                     <a href={`mailto:${EMAIL}`} className="group flex items-start gap-4">
-                      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-orange-tint text-orange transition-colors duration-[var(--dur-base)] group-hover:bg-orange group-hover:text-white">
+                      <span className="grid size-11 shrink-0 place-items-center rounded-full bg-orange-tint text-orange transition-colors duration-[var(--dur-base)] group-hover:bg-orange group-hover:text-on-orange">
                         <Mail className="size-4" aria-hidden="true" />
                       </span>
                       <span>

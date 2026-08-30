@@ -18,7 +18,7 @@ export const ServiceCard = ({ service }: { service: Service }) => (
     )}
   >
     {service.popular && (
-      <span className="absolute -top-3 left-7 bg-orange px-3 py-1 font-heading text-[0.62rem] font-700 uppercase tracking-[0.16em] text-white">
+      <span className="absolute -top-3 left-7 bg-orange px-3 py-1 font-heading text-[0.62rem] font-700 uppercase tracking-[0.16em] text-on-orange">
         Most popular
       </span>
     )}
@@ -27,7 +27,7 @@ export const ServiceCard = ({ service }: { service: Service }) => (
       className={cn(
         'grid size-14 place-items-center rounded-full bg-orange-tint text-orange',
         'transition-[background-color,color] duration-[var(--dur-base)]',
-        'group-hover:bg-orange group-hover:text-white'
+        'group-hover:bg-orange group-hover:text-on-orange'
       )}
     >
       <Icon name={service.icon} className="size-6" />

@@ -90,7 +90,7 @@ const CategoryCard = ({ category }: { category: PestCategory }) => {
           className={cn(
             'grid size-12 place-items-center rounded-full bg-orange-tint text-orange',
             'transition-[background-color,color] duration-[var(--dur-base)]',
-            'group-hover:bg-orange group-hover:text-white'
+            'group-hover:bg-orange group-hover:text-on-orange'
           )}
         >
           <Icon name={category.icon} className="size-5" strokeWidth={1.75} />

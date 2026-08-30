@@ -63,7 +63,7 @@ const AccordionRow = ({
               'mt-0.5 grid size-8 shrink-0 place-items-center rounded-full border-2 border-ink/20',
               'transition-[transform,background-color,border-color] duration-[var(--dur-base)]',
               'ease-[var(--ease-out-expo)]',
-              isOpen ? 'rotate-45 border-orange bg-orange text-white' : 'group-hover:border-orange/50'
+              isOpen ? 'rotate-45 border-orange bg-orange text-on-orange' : 'group-hover:border-orange/50'
             )}
             aria-hidden="true"
           >

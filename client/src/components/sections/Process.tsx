@@ -75,7 +75,7 @@ export const Process = ({ steps }: { steps: ProcessStep[] }) => {
                       'transition-[background-color,border-color,color,transform] duration-[var(--dur-base)]',
                       'ease-[var(--ease-out-expo)]',
                       isActive
-                        ? 'scale-110 border-orange bg-orange text-white'
+                        ? 'scale-110 border-orange bg-orange text-on-orange'
                         : isDone
                           ? 'border-on-inverse/30 bg-on-inverse/10 text-on-inverse/70'
                           : 'border-on-inverse/20 text-on-inverse/60 group-hover:border-on-inverse/50 group-hover:text-on-inverse'

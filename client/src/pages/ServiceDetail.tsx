@@ -46,12 +46,6 @@ export const ServiceDetail = () => {
             {PHONE}
           </Button>
 
-          <p className="text-[0.9rem] text-muted">
-            <span className="tabular font-display text-[1.75rem] text-ink">
-              ${service.priceFrom}
-            </span>
-            <span className="font-heading font-600">{service.unit}</span> to start
-          </p>
         </div>
       </PageHero>
 

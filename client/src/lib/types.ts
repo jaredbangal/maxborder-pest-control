@@ -2,8 +2,6 @@ export type Service = {
   slug: string;
   name: string;
   icon: string;
-  priceFrom: number;
-  unit: string;
   summary: string;
   description: string;
   covers: string[];
@@ -16,9 +14,6 @@ export type Service = {
 export type Plan = {
   id: string;
   name: string;
-  price: number;
-  cadence: string;
-  setup: number;
   blurb: string;
   features: string[];
   notIncluded: string[];

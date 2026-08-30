@@ -17,7 +17,7 @@ export const Plans = () => {
     <>
       <Meta
         title="Plans & Pricing"
-        description="Transparent monthly pest control pricing. Three plans from $49/mo, all with free return visits and no long-term contract."
+        description="Three pest control plans, all with free return visits and no long-term contract. Every plan is quoted after a free inspection."
       />
 
       <PageHero
@@ -25,12 +25,12 @@ export const Plans = () => {
         crumbs={[{ to: '/plans', label: 'Plans' }]}
         title={
           <>
-            Honest pricing,
+            Pick the level
             <br />
-            printed up front.
+            of cover.
           </>
         }
-        intro="Every plan is month to month after the initial service period. No callout fees, no re-service charges, and no pressure to upgrade."
+        intro="Every plan is quoted after a free inspection, so the price fits your actual property rather than a guess. Month to month after the initial service period, with no callout fees and no re-service charges."
       />
 
       <Section tone="cream" className="!pt-4" id="compare">
@@ -44,8 +44,8 @@ export const Plans = () => {
 
         <Reveal delay={200}>
           <p className="mt-10 text-center text-[0.88rem] text-muted">
-            Prices shown are for single-family homes up to 3,000 sq ft. Larger properties and
-            commercial sites are quoted after the free inspection.
+            Every property is different, so we quote after walking it. Tell us what you are seeing
+            and we will put a written plan and price in front of you before anything is signed.
           </p>
         </Reveal>
       </Section>
@@ -63,12 +63,12 @@ const PlanCard = ({ plan }: { plan: Plan }) => (
       'transition-[border-color,transform,box-shadow] duration-[var(--dur-base)]',
       'ease-[var(--ease-out-expo)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lg)]',
       plan.popular
-        ? 'border-ink bg-ink text-cream shadow-[var(--shadow-lg)]'
+        ? 'border-ink bg-inverse text-on-inverse shadow-[var(--shadow-lg)]'
         : 'border-ink/12 bg-paper hover:border-ink'
     )}
   >
     {plan.popular && (
-      <span className="absolute -top-3 left-8 bg-orange px-3 py-1 font-heading text-[0.62rem] font-700 uppercase tracking-[0.16em] text-white">
+      <span className="absolute -top-3 left-8 bg-orange px-3 py-1 font-heading text-[0.62rem] font-700 uppercase tracking-[0.16em] text-on-orange">
         Best value
       </span>
     )}
@@ -76,52 +76,38 @@ const PlanCard = ({ plan }: { plan: Plan }) => (
     <h2
       className={cn(
         'font-heading text-[1.5rem] font-800',
-        plan.popular ? 'text-cream' : 'text-ink'
+        plan.popular ? 'text-on-inverse' : 'text-ink'
       )}
     >
       {plan.name}
     </h2>
 
-    <p className={cn('mt-2 text-[0.92rem]', plan.popular ? 'text-cream/65' : 'text-muted')}>
+    <p className={cn('mt-2 text-[0.92rem]', plan.popular ? 'text-on-inverse/65' : 'text-muted')}>
       {plan.blurb}
     </p>
 
-    <p className="mt-7 flex items-baseline gap-1">
-      <span
-        className={cn(
-          'tabular font-display text-[3rem] leading-none',
-          plan.popular ? 'text-cream' : 'text-ink'
-        )}
-      >
-        ${plan.price}
-      </span>
-      <span
-        className={cn(
-          'font-heading text-[0.85rem] font-600',
-          plan.popular ? 'text-cream/60' : 'text-muted'
-        )}
-      >
-        /{plan.cadence.replace('per ', '')}
-      </span>
-    </p>
-
-    <p className={cn('mt-2 text-[0.82rem]', plan.popular ? 'text-cream/60' : 'text-muted')}>
-      {plan.setup === 0 ? 'No setup fee' : `Plus $${plan.setup} initial service`}
+    <p
+      className={cn(
+        'mt-7 font-heading text-[0.72rem] font-700 uppercase tracking-[0.14em]',
+        plan.popular ? 'text-on-inverse/65' : 'text-muted'
+      )}
+    >
+      Quoted after your free inspection
     </p>
 
     <Button
       to="/contact"
       variant={plan.popular ? 'primary' : 'outline'}
       size="lg"
-      className="mt-7 w-full"
+      className="mt-4 w-full"
     >
-      Choose {plan.name}
+      Get a quote
     </Button>
 
     <ul
       className={cn(
         'mt-8 space-y-3 border-t pt-7',
-        plan.popular ? 'border-cream/15' : 'border-ink/12'
+        plan.popular ? 'border-on-inverse/15' : 'border-ink/12'
       )}
     >
       {plan.features.map((feature) => (
@@ -134,7 +120,7 @@ const PlanCard = ({ plan }: { plan: Plan }) => (
             strokeWidth={3}
             aria-hidden="true"
           />
-          <span className={cn('text-[0.9rem]', plan.popular ? 'text-cream/85' : 'text-ink')}>
+          <span className={cn('text-[0.9rem]', plan.popular ? 'text-on-inverse/85' : 'text-ink')}>
             {feature}
           </span>
         </li>
@@ -143,11 +129,11 @@ const PlanCard = ({ plan }: { plan: Plan }) => (
       {plan.notIncluded.map((feature) => (
         <li key={feature} className="flex items-start gap-3">
           <Minus
-            className={cn('mt-0.5 size-4 shrink-0', plan.popular ? 'text-cream/30' : 'text-ink/25')}
+            className={cn('mt-0.5 size-4 shrink-0', plan.popular ? 'text-on-inverse/30' : 'text-ink/25')}
             strokeWidth={3}
             aria-hidden="true"
           />
-          <span className={cn('text-[0.9rem] line-through', plan.popular ? 'text-cream/60' : 'text-muted/85')}>
+          <span className={cn('text-[0.9rem] line-through', plan.popular ? 'text-on-inverse/60' : 'text-muted/85')}>
             {feature}
           </span>
           <span className="sr-only-focusable">not included</span>

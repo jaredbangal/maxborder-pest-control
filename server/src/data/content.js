@@ -36,8 +36,6 @@ export const services = [
     slug: 'general-pest-control',
     name: 'General Pest Control',
     icon: 'shield',
-    priceFrom: 49,
-    unit: '/mo',
     summary: 'Year-round protection against the 50+ pests that actually show up at your door.',
     description:
       'Our flagship plan builds a treated barrier around the entire structure and refreshes it every quarter as the seasons shift. Ants in spring, spiders in summer, rodents pushing indoors in fall — each visit is tuned to what is active right now, not a generic spray.',
@@ -54,8 +52,6 @@ export const services = [
     slug: 'rodent-control',
     name: 'Rodent Control',
     icon: 'mouse',
-    priceFrom: 59,
-    unit: '/mo',
     summary: 'Trap, remove, and seal the entry points so they cannot come back.',
     description:
       'Rodents are an exclusion problem, not a trapping problem. We map every entry point down to the quarter-inch, seal them with rodent-proof materials, and monitor the property until activity reaches zero.',
@@ -71,8 +67,6 @@ export const services = [
     slug: 'mosquito-tick-flea',
     name: 'Mosquito, Tick & Flea',
     icon: 'droplet',
-    priceFrom: 79,
-    unit: '/mo',
     summary: 'Take the yard back. Treatments target where they breed, not just where they bite.',
     description:
       'Mosquitoes rest in shaded foliage and breed in standing water measured in tablespoons. We treat harborage zones, eliminate breeding sites, and apply a residual barrier that keeps working between visits.',
@@ -89,8 +83,6 @@ export const services = [
     slug: 'bed-bug-treatment',
     name: 'Bed Bug Treatment',
     icon: 'bed',
-    priceFrom: 899,
-    unit: ' one-time',
     summary: 'Heat remediation that reaches lethal temperature in every crack, in a single day.',
     description:
       'Chemical-only bed bug treatments fail because eggs survive. We raise the entire space above the lethal threshold and hold it there, verified by wireless sensors placed in the hardest-to-heat corners of the room.',
@@ -106,8 +98,6 @@ export const services = [
     slug: 'commercial-pest-control',
     name: 'Commercial & Multi-Unit',
     icon: 'building',
-    priceFrom: 129,
-    unit: '/mo',
     summary: 'Audit-ready pest management for food service, healthcare, and property managers.',
     description:
       'Built for properties that get inspected. Every visit is logged, every device is barcoded, and your documentation binder stays current and audit-ready — whether the inspector is from the health department, AIB, or your own corporate QA team.',
@@ -125,9 +115,6 @@ export const plans = [
   {
     id: 'essential',
     name: 'Essential',
-    price: 49,
-    cadence: 'per month',
-    setup: 149,
     blurb: 'Core protection for the pests that show up every single year.',
     features: [
       'Quarterly exterior treatments',
@@ -141,9 +128,6 @@ export const plans = [
   {
     id: 'complete',
     name: 'Complete',
-    price: 89,
-    cadence: 'per month',
-    setup: 99,
     blurb: 'Everything in Essential plus the seasonal pests that ruin your yard.',
     features: [
       'Everything in Essential',
@@ -159,14 +143,11 @@ export const plans = [
   {
     id: 'fortress',
     name: 'Fortress',
-    price: 139,
-    cadence: 'per month',
-    setup: 0,
-    blurb: 'Total structural defense, including the termite damage guarantee.',
+    blurb: 'Total structural defense, including the damage repair guarantee.',
     features: [
       'Everything in Complete',
       'Monitored termite bait perimeter',
-      'Damage repair guarantee to $250,000',
+      'Damage repair guarantee',
       'Full rodent exclusion & sealing',
       'Annual certified inspection report',
       'Same-day emergency response',

@@ -27,7 +27,7 @@ export const Services = () => {
             has a plan behind it.
           </>
         }
-        intro="Six services, each priced monthly and each backed by the same guarantee: if it comes back between visits, so do we — free."
+        intro="Every service is backed by the same guarantee: if it comes back between visits, so do we — free."
       />
 
       <Section tone="cream" className="!pt-4">

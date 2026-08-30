@@ -58,7 +58,7 @@ export const CtaBanner = ({ services }: { services: Service[] }) => (
               </div>
               <div>
                 <dt className="eyebrow text-on-inverse/60">Re-service cost</dt>
-                <dd className="mt-2 font-display text-[2rem] leading-none text-on-inverse tabular">$0</dd>
+                <dd className="mt-2 font-display text-[2rem] leading-none text-on-inverse">Free</dd>
               </div>
             </dl>
           </Reveal>

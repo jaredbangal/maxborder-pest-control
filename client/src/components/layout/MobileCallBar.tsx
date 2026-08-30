@@ -51,7 +51,7 @@ export const MobileCallBar = () => {
 
         <Link
           to="/contact"
-          className="flex min-h-[3rem] items-center justify-center gap-2 rounded-[3px] bg-orange font-heading text-[0.78rem] font-700 uppercase tracking-[0.08em] text-white transition-colors duration-[var(--dur-fast)] active:bg-orange-deep"
+          className="flex min-h-[3rem] items-center justify-center gap-2 rounded-[3px] bg-orange font-heading text-[0.78rem] font-700 uppercase tracking-[0.08em] text-on-orange transition-colors duration-[var(--dur-fast)] active:bg-orange-deep"
         >
           <CalendarCheck className="size-4" aria-hidden="true" />
           Free quote
