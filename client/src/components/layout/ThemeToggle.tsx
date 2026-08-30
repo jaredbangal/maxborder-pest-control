@@ -11,7 +11,13 @@ import { applyTheme, readTheme, systemTheme, type Theme } from '@/lib/theme';
  * 'system', it keeps following the OS live — flip your Mac to dark at sunset
  * and the page follows without a reload.
  */
-export const ThemeToggle = ({ className }: { className?: string }) => {
+export const ThemeToggle = ({
+  className,
+  tone = 'default',
+}: {
+  className?: string;
+  tone?: 'default' | 'inverse';
+}) => {
   const [theme, setTheme] = useState<Theme>(() => readTheme());
   const [effective, setEffective] = useState<'light' | 'dark'>(() =>
     readTheme() === 'system' ? systemTheme() : (readTheme() as 'light' | 'dark')
@@ -57,9 +63,10 @@ export const ThemeToggle = ({ className }: { className?: string }) => {
       title={isDark ? 'Day mode' : 'Night mode'}
       className={cn(
         'group relative grid size-11 shrink-0 cursor-pointer place-items-center rounded-full',
-        'border-2 border-ink/15 text-ink',
         'transition-[background-color,border-color,color] duration-[var(--dur-base)]',
-        'hover:border-ink hover:bg-ink hover:text-cream',
+        tone === 'inverse'
+          ? 'border-2 border-on-inverse/25 text-on-inverse hover:border-on-inverse hover:bg-on-inverse hover:text-inverse'
+          : 'border-2 border-ink/15 text-ink hover:border-ink hover:bg-ink hover:text-cream',
         className
       )}
     >

@@ -30,10 +30,10 @@ export const AnnouncementBar = () => {
   if (!visible) return null;
 
   return (
-    <div className="relative bg-orange text-on-orange">
+    <div className="relative border-b border-on-inverse/12 bg-inverse text-on-inverse">
       <div className="mx-auto flex max-w-[80rem] items-center justify-center gap-3 px-14 py-2.5 text-center">
         <p className="text-[0.78rem] leading-snug font-500 sm:text-[0.8rem]">
-          <span className="font-heading font-700 uppercase tracking-[0.12em]">Season Special</span>
+          <span className="font-heading font-700 uppercase tracking-[0.12em] text-orange-bright">Season Special</span>
           <span aria-hidden="true" className="mx-2 opacity-50">
             /
           </span>
@@ -45,7 +45,7 @@ export const AnnouncementBar = () => {
           type="button"
           onClick={dismiss}
           aria-label="Dismiss announcement"
-          className="absolute right-3 grid size-11 cursor-pointer place-items-center rounded-full transition-colors duration-[var(--dur-fast)] hover:bg-white/15"
+          className="absolute right-3 grid size-11 cursor-pointer place-items-center rounded-full transition-colors duration-[var(--dur-fast)] hover:bg-on-inverse/15"
         >
           <X className="size-4" aria-hidden="true" />
         </button>

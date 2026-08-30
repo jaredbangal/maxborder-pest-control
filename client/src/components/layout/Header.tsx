@@ -19,35 +19,37 @@ export const Header = () => {
     <>
       <a
         href="#main"
-        className="sr-only-focusable fixed left-4 top-4 z-[var(--z-toast)] rounded-[3px] bg-ink px-5 py-3 font-heading text-[0.8rem] font-700 uppercase tracking-[0.12em] text-cream"
+        className="sr-only-focusable fixed left-4 top-4 z-[var(--z-toast)] rounded-[3px] bg-on-inverse px-5 py-3 font-heading text-[0.8rem] font-700 uppercase tracking-[0.12em] text-inverse"
       >
         Skip to main content
       </a>
 
+      {/*
+        The whole header block is navy so it reads as one solid bar against the
+        orange hero below it. Keeping the promo strip orange too would have put
+        orange above navy above orange, which just looks like banding.
+      */}
       <header
         className={cn(
-          'fixed inset-x-0 top-0',
-          'transition-[transform,background-color,box-shadow,backdrop-filter] duration-[var(--dur-slow)]',
-          'ease-[var(--ease-out-expo)]',
+          'fixed inset-x-0 top-0 bg-inverse text-on-inverse',
+          'transition-[transform,box-shadow] duration-[var(--dur-slow)] ease-[var(--ease-out-expo)]',
           hidden && !menuOpen ? '-translate-y-full' : 'translate-y-0',
-          scrolled ? 'bg-cream/92 shadow-[var(--shadow-md)] backdrop-blur-md' : 'bg-transparent'
+          scrolled && 'shadow-[var(--shadow-lg)]'
         )}
         style={{ zIndex: 'var(--z-header)' }}
       >
         {!scrolled && <AnnouncementBar />}
 
-        {/* Utility bar — collapses on scroll to keep the sticky header compact.
-            Secondary links only: nothing essential lives here, because anything
-            in this row disappears the moment the page scrolls. */}
-        <div className="hidden border-b border-ink/10 lg:block">
+        {/* Utility row — collapses on scroll. Secondary links only. */}
+        <div className="hidden border-b border-on-inverse/12 lg:block">
           <div
             className={cn(
               'flex items-center justify-between px-5 transition-[padding] duration-[var(--dur-base)] sm:px-8 lg:px-12',
               scrolled ? 'py-1' : 'py-2'
             )}
           >
-            <p className="flex items-center gap-2 text-[0.76rem] text-muted">
-              <ShieldCheck className="size-3.5 text-orange" aria-hidden="true" />
+            <p className="flex items-center gap-2 text-[0.76rem] text-on-inverse/70">
+              <ShieldCheck className="size-3.5 text-orange-bright" aria-hidden="true" />
               Licensed &amp; insured · Free return visits · Service within 48 hours
             </p>
 
@@ -61,7 +63,7 @@ export const Header = () => {
                         className={({ isActive }) =>
                           cn(
                             'text-[0.76rem] transition-colors duration-[var(--dur-fast)]',
-                            isActive ? 'text-ink' : 'text-muted hover:text-ink'
+                            isActive ? 'text-on-inverse' : 'text-on-inverse/70 hover:text-on-inverse'
                           )
                         }
                       >
@@ -72,18 +74,13 @@ export const Header = () => {
                 </ul>
               </nav>
 
-              {/* Top-right corner of the page. This bar deliberately does NOT
-                  collapse on scroll — it did once, and took the toggle with it. */}
-              <ThemeToggle className="size-9" />
+              {/* Top-right corner of the page. */}
+              <ThemeToggle tone="inverse" className="size-9" />
             </div>
           </div>
         </div>
 
-        {/*
-          Main row. Full-bleed rather than a centred max-width box so the logo
-          and the toggle sit at the real edges of the screen — boxed, the toggle
-          drifted hundreds of pixels inward on a wide monitor.
-        */}
+        {/* Main row: logo left, three tabs centred, actions right. */}
         <div className="flex items-center gap-6 px-5 sm:px-8 lg:px-12">
           <Link
             to="/"
@@ -93,37 +90,43 @@ export const Header = () => {
               scrolled ? 'py-3' : 'py-4'
             )}
           >
-            <Logo />
+            <Logo variant="light" />
           </Link>
 
+          {/* Segmented tabs rather than plain links: the current section reads
+              at a glance instead of relying on a 2px underline. */}
           <nav className="mx-auto hidden lg:block" aria-label="Primary">
-            <ul className="flex items-center gap-10 xl:gap-14">
-              {NAV_LINKS.map((link) => (
-                <li key={link.to}>
-                  <NavLink
-                    to={link.to}
-                    data-active={pathname.startsWith(link.to)}
-                    className={({ isActive }) =>
-                      cn(
-                        'link-underline whitespace-nowrap py-2 font-heading text-[0.85rem] font-700 uppercase tracking-[0.12em]',
-                        'transition-colors duration-[var(--dur-fast)]',
-                        isActive ? 'text-ink' : 'text-muted hover:text-ink'
-                      )
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                </li>
-              ))}
+            <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
+              {NAV_LINKS.map((link) => {
+                const active = pathname.startsWith(link.to);
+                return (
+                  <li key={link.to}>
+                    <NavLink
+                      to={link.to}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(
+                        'flex min-h-[2.75rem] items-center whitespace-nowrap rounded-full px-6',
+                        'font-heading text-[0.8rem] font-700 uppercase tracking-[0.1em]',
+                        'transition-[background-color,color] duration-[var(--dur-base)]',
+                        active
+                          ? 'bg-orange text-on-orange shadow-[var(--shadow-orange)]'
+                          : 'text-on-inverse/70 hover:bg-on-inverse/10 hover:text-on-inverse'
+                      )}
+                    >
+                      {link.label}
+                    </NavLink>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
           <div className="ml-auto flex items-center gap-3 lg:ml-0">
             <a
               href={PHONE_HREF}
-              className="hidden items-center gap-2 font-heading text-[0.85rem] font-700 text-ink transition-colors duration-[var(--dur-fast)] hover:text-orange xl:flex"
+              className="hidden items-center gap-2 font-heading text-[0.85rem] font-700 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:text-orange-bright xl:flex"
             >
-              <Phone className="size-4 text-orange" aria-hidden="true" />
+              <Phone className="size-4 text-orange-bright" aria-hidden="true" />
               {PHONE}
             </a>
 
@@ -146,18 +149,15 @@ export const Header = () => {
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
               aria-expanded={menuOpen}
-              className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-ink/15 transition-colors duration-[var(--dur-fast)] hover:border-ink hover:bg-ink hover:text-cream lg:hidden"
+              className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-on-inverse/25 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:border-on-inverse hover:bg-on-inverse hover:text-inverse lg:hidden"
             >
               <Menu className="size-5" aria-hidden="true" />
             </button>
 
-            {/* Below lg the utility bar is hidden, so the toggle lives here.
-                Exactly one of the two is ever displayed. */}
-            <ThemeToggle className="lg:hidden" />
+            {/* Below lg the utility row is hidden, so the toggle lives here. */}
+            <ThemeToggle tone="inverse" className="lg:hidden" />
           </div>
         </div>
-
-        <div className={cn('perimeter-rule transition-opacity duration-[var(--dur-base)]', scrolled ? 'opacity-25' : 'opacity-0')} />
       </header>
 
       <MobileNav open={menuOpen} onClose={() => setMenuOpen(false)} />

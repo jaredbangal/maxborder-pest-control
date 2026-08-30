@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
-type Variant = 'primary' | 'dark' | 'outline' | 'ghost' | 'light';
+type Variant = 'primary' | 'dark' | 'outline' | 'ghost' | 'light' | 'onHero' | 'onHeroOutline';
 type Size = 'sm' | 'md' | 'lg';
 
 // NOTE: no display utility here. `inline-flex` in the base would win over a
@@ -25,6 +25,11 @@ const variants: Record<Variant, string> = {
   light:
     'border-2 border-on-inverse/35 text-on-inverse bg-transparent hover:bg-on-inverse hover:text-inverse hover:border-on-inverse',
   ghost: 'text-ink hover:bg-ink/8',
+  // For the orange hero, where a filled orange button would disappear.
+  onHero:
+    'bg-on-hero text-hero hover:bg-on-hero/90 shadow-[0_12px_32px_-10px_rgba(0,0,0,0.35)]',
+  onHeroOutline:
+    'border-2 border-on-hero/50 text-on-hero bg-transparent hover:bg-on-hero hover:text-hero hover:border-on-hero',
 };
 
 // Every size clears the 44px minimum touch target.
