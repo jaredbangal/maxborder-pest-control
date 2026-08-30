@@ -11,7 +11,7 @@ const TIMELINE = [
   {
     year: '2009',
     title: 'One truck, one technician',
-    body: 'Maxborder started with a single route around east Austin and a simple rule that has not changed: never sell a treatment the property does not need.',
+    body: 'Maxborder started with a single route around the Salt Lake valley and a simple rule that has not changed: never sell a treatment the property does not need.',
   },
   {
     year: '2014',
@@ -20,8 +20,8 @@ const TIMELINE = [
   },
   {
     year: '2019',
-    title: 'Statewide coverage',
-    body: 'Four regions, sixty technicians, and a routing system built to keep drive times short enough that 48-hour scheduling is a promise rather than a hope.',
+    title: 'Wasatch Front coverage',
+    body: 'Six counties, sixty technicians, and a routing system built to keep drive times short enough that same-week scheduling is a promise rather than a hope.',
   },
   {
     year: '2024',
@@ -37,7 +37,7 @@ export const About = () => {
     <>
       <Meta
         title="About Us"
-        description="Maxborder has protected Texas homes and businesses since 2009. Licensed technicians, written guarantees, and a 98% annual retention rate."
+        description="Maxborder has protected Salt Lake City homes and businesses since 2009. Licensed technicians and written guarantees."
       />
 
       <PageHero
@@ -50,7 +50,7 @@ export const About = () => {
             holding the line.
           </>
         }
-        intro="We are a Texas pest control company that grew slowly on purpose. Every technician is licensed, badged, background-checked, and paid on service quality rather than upsell volume."
+        intro="We are a Salt Lake City pest control company that grew slowly on purpose. Every technician is licensed, badged, background-checked, and paid on service quality rather than upsell volume."
       />
 
       <StatsBand stats={site.stats} />

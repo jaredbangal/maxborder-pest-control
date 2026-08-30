@@ -10,7 +10,7 @@ export const company = {
   phone: '(888) 629-7378',
   phoneHref: 'tel:+18886297378',
   email: 'hello@maxborderpest.com',
-  address: { street: '1420 Ironwood Ave, Suite 300', city: 'Austin', state: 'TX', zip: '78701' },
+  address: { street: '1420 Ironwood Ave, Suite 300', city: 'Salt Lake City', state: 'UT', zip: '84101' },
   hours: [
     { days: 'Monday – Friday', open: '7:00 AM – 7:00 PM' },
     { days: 'Saturday', open: '8:00 AM – 4:00 PM' },
@@ -280,7 +280,7 @@ export const testimonials = [
       'We had carpenter ants working through a support beam and two other companies told us to just spray and hope. Maxborder found the satellite nest in the crawlspace on the first visit. Eighteen months later, nothing.',
     name: 'Danielle Reyes',
     role: 'Homeowner',
-    location: 'Round Rock, TX',
+    location: 'Sandy, UT',
     rating: 5,
   },
   {
@@ -288,7 +288,7 @@ export const testimonials = [
       'I manage 240 units. Their digital logs meant our last health inspection took forty minutes instead of half a day. Every device scanned, every visit documented, nothing to scramble for.',
     name: 'Marcus Bell',
     role: 'Property Manager',
-    location: 'Austin, TX',
+    location: 'Salt Lake City, UT',
     rating: 5,
   },
   {
@@ -296,7 +296,7 @@ export const testimonials = [
       'Called on a Tuesday about wasps over the back door. Technician was out Wednesday morning, found a second nest in the soffit I had no idea about, and removed both. No upsell, no drama.',
     name: 'Priya Raman',
     role: 'Homeowner',
-    location: 'Cedar Park, TX',
+    location: 'Draper, UT',
     rating: 5,
   },
   {
@@ -304,7 +304,7 @@ export const testimonials = [
       'The mosquito service is the only reason we use our backyard in July. My kids play out there now without getting eaten alive. Worth every dollar.',
     name: 'Tom Whitaker',
     role: 'Homeowner',
-    location: 'Georgetown, TX',
+    location: 'Bountiful, UT',
     rating: 5,
   },
   {
@@ -312,7 +312,7 @@ export const testimonials = [
       'Bed bugs in a rental turnover is a nightmare scenario. They did the heat treatment in one day, gave me sensor readings as proof, and the unit was re-leased that week.',
     name: 'Alicia Nnamdi',
     role: 'Landlord',
-    location: 'Pflugerville, TX',
+    location: 'West Jordan, UT',
     rating: 5,
   },
 ];
@@ -350,20 +350,41 @@ export const faqs = [
 
 export const serviceAreas = [
   {
-    region: 'Central Texas',
-    cities: ['Austin', 'Round Rock', 'Cedar Park', 'Georgetown', 'Pflugerville', 'Leander', 'Kyle', 'San Marcos'],
+    region: 'Salt Lake County',
+    cities: [
+      'Salt Lake City',
+      'West Valley City',
+      'West Jordan',
+      'Sandy',
+      'South Jordan',
+      'Murray',
+      'Draper',
+      'Riverton',
+      'Taylorsville',
+      'Millcreek',
+      'Cottonwood Heights',
+      'Holladay',
+    ],
   },
   {
-    region: 'North Texas',
-    cities: ['Dallas', 'Fort Worth', 'Plano', 'Frisco', 'Arlington', 'McKinney', 'Denton', 'Irving'],
+    region: 'Utah County',
+    cities: ['Provo', 'Orem', 'Lehi', 'American Fork', 'Pleasant Grove', 'Saratoga Springs', 'Springville'],
   },
   {
-    region: 'Gulf Coast',
-    cities: ['Houston', 'Sugar Land', 'Katy', 'The Woodlands', 'Pearland', 'League City', 'Galveston'],
+    region: 'Davis County',
+    cities: ['Layton', 'Bountiful', 'Kaysville', 'Farmington', 'Clearfield', 'Syracuse', 'Centerville'],
   },
   {
-    region: 'South Texas',
-    cities: ['San Antonio', 'New Braunfels', 'Schertz', 'Boerne', 'Seguin', 'Corpus Christi'],
+    region: 'Weber County',
+    cities: ['Ogden', 'Roy', 'South Ogden', 'North Ogden', 'Riverdale', 'Washington Terrace'],
+  },
+  {
+    region: 'Summit County',
+    cities: ['Park City', 'Coalville', 'Kamas', 'Francis'],
+  },
+  {
+    region: 'Tooele County',
+    cities: ['Tooele', 'Grantsville', 'Stansbury Park', 'Erda'],
   },
 ];
 

@@ -81,9 +81,9 @@ contentRouter.get('/coverage/:zip', (req, res) => {
   if (!/^\d{5}$/.test(zip)) {
     return res.status(400).json({ ok: false, error: 'Enter a 5-digit ZIP code.' });
   }
-  // Demo rule: Texas ZIPs (75000–79999) are in-network.
+  // Demo rule: Utah ZIPs (84000–84799) are in-network.
   const n = Number(zip);
-  const covered = n >= 75000 && n <= 79999;
+  const covered = n >= 84000 && n <= 84799;
   res.json({
     ok: true,
     data: {

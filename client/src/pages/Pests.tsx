@@ -13,7 +13,7 @@ export const Pests = () => {
     <>
       <Meta
         title="Pest Library"
-        description="Identify what you are dealing with. Season, risk level, and treatment for the 50+ pests we cover across Texas."
+        description="Identify what you are dealing with. Season, risk level, and treatment for the 50+ pests we cover across the Salt Lake City area."
       />
 
       <PageHero

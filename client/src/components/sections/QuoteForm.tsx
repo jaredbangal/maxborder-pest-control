@@ -148,7 +148,7 @@ export const QuoteForm = ({
           required
           autoComplete="tel"
           inputMode="tel"
-          placeholder="(512) 555-0134"
+          placeholder="(801) 555-0134"
           tone={tone}
           value={values.phone}
           error={errors.phone}

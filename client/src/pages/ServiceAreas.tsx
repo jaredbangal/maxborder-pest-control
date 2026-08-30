@@ -15,7 +15,7 @@ export const ServiceAreas = () => {
     <>
       <Meta
         title="Service Areas"
-        description="Maxborder services Central Texas, North Texas, the Gulf Coast and South Texas. Check your ZIP for same-week scheduling."
+        description="Maxborder services Salt Lake City and the surrounding counties along the Wasatch Front. Check your ZIP for same-week scheduling."
       />
 
       <PageHero
@@ -23,12 +23,12 @@ export const ServiceAreas = () => {
         crumbs={[{ to: '/service-areas', label: 'Service Areas' }]}
         title={
           <>
-            {site.serviceAreas.length} regions.
+            {site.serviceAreas.length} counties.
             <br />
             {totalCities}+ cities.
           </>
         }
-        intro="Routes are built for density rather than reach, which is what makes a 48-hour service window a promise instead of a hope. If you are just outside a region, tell us — we expand where the demand is."
+        intro="Routes are built for density rather than reach, which is what makes a same-week service window a promise instead of a hope. If you are just outside a county, tell us — we expand where the demand is."
       >
         <ZipChecker />
       </PageHero>

@@ -53,7 +53,7 @@ export const ZipChecker = () => {
               inputMode="numeric"
               autoComplete="postal-code"
               maxLength={5}
-              placeholder="78701"
+              placeholder="84101"
               value={zip}
               onChange={(e) => setZip(e.target.value.replace(/\D/g, ''))}
               aria-describedby="zip-result"
