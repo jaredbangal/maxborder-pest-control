@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { MobileCallBar } from '@/components/layout/MobileCallBar';
@@ -15,11 +15,13 @@ import { Plans } from '@/pages/Plans';
 import { Pests } from '@/pages/Pests';
 import { About } from '@/pages/About';
 import { Contact } from '@/pages/Contact';
-import { Faq } from '@/pages/Faq';
+import { Faqs } from '@/pages/Faqs';
+import { Coverage } from '@/pages/Coverage';
+import { HowItWorks } from '@/pages/HowItWorks';
 import { NotFound } from '@/pages/NotFound';
 
 const Shell = () => {
-  const { site, demo } = useSite();
+  const { demo } = useSite();
 
   return (
     <>
@@ -39,12 +41,16 @@ const Shell = () => {
           <Route path="/pests" element={<Pests />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/faq" element={<Faq />} />
+          <Route path="/coverage" element={<Coverage />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/faqs" element={<Faqs />} />
+          {/* Old FAQ URL kept alive so existing links do not 404. */}
+          <Route path="/faq" element={<Navigate to="/faqs" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
-      <Footer areas={site.serviceAreas} demo={demo} />
+      <Footer demo={demo} />
       <MobileCallBar />
     </>
   );

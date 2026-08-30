@@ -1,4 +1,4 @@
-import { ArrowRight, Phone } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Marquee } from '@/components/ui/Marquee';
 import { Reveal } from '@/components/ui/Reveal';
@@ -47,13 +47,6 @@ export const CtaBanner = ({ services }: { services: Service[] }) => (
                 {PHONE}
               </Button>
 
-              <Button to="/plans" variant="light" size="lg" className="group">
-                Compare plans
-                <ArrowRight
-                  className="size-4 transition-transform duration-[var(--dur-base)] group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
-              </Button>
             </div>
           </Reveal>
 
@@ -61,7 +54,7 @@ export const CtaBanner = ({ services }: { services: Service[] }) => (
             <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-on-inverse/12 pt-8">
               <div>
                 <dt className="eyebrow text-on-inverse/60">Response time</dt>
-                <dd className="mt-2 font-display text-[2rem] leading-none text-on-inverse tabular">48hr</dd>
+                <dd className="mt-2 font-display text-[2rem] leading-none text-on-inverse tabular">24hr</dd>
               </div>
               <div>
                 <dt className="eyebrow text-on-inverse/60">Re-service cost</dt>

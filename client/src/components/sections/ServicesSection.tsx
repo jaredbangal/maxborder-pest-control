@@ -37,13 +37,9 @@ export const ServiceCard = ({ service }: { service: Service }) => (
 
     <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-muted">{service.summary}</p>
 
-    <div className="mt-7 flex items-end justify-between border-t border-ink/12 pt-5">
-      <span>
-        <span className="eyebrow block">Starting at</span>
-        <span className="tabular font-display text-[1.6rem] leading-none text-ink">
-          ${service.priceFrom}
-          <span className="font-heading text-[0.85rem] font-600 text-muted">{service.unit}</span>
-        </span>
+    <div className="mt-7 flex items-center justify-between border-t border-ink/12 pt-5">
+      <span className="font-heading text-[0.74rem] font-700 uppercase tracking-[0.12em] text-ink">
+        Learn more
       </span>
 
       <span
@@ -72,7 +68,7 @@ export const ServicesSection = ({ services }: { services: Service[] }) => (
             problem on your property.
           </>
         }
-        intro="If it creeps, crawls, bites, or stings, there is a service below built for it — priced monthly, with no surprise callout fees."
+        intro="If it creeps, crawls, bites, or stings, there is a service below built for it — with no surprise callout fees."
       />
     </div>
 

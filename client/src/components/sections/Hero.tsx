@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { PerimeterGraphic } from './PerimeterGraphic';
-import { ZipChecker } from './ZipChecker';
 import { PHONE, PHONE_HREF } from '@/lib/constants';
 
 const TRUST_POINTS = [
@@ -79,10 +78,6 @@ export const Hero = () => (
                 {PHONE}
               </Button>
             </div>
-          </Reveal>
-
-          <Reveal delay={340}>
-            <ZipChecker />
           </Reveal>
 
           <Reveal delay={420}>

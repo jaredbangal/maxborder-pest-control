@@ -21,9 +21,9 @@ import { useSite } from '@/lib/SiteContext';
 const INDUSTRIES = [
   { Icon: UtensilsCrossed, name: 'Restaurants & food service', note: 'Health department and AIB ready' },
   { Icon: Warehouse, name: 'Warehousing & distribution', note: 'Stored product pest programmes' },
-  { Icon: Hotel, name: 'Hotels & multi-family', note: 'Discreet, unit-by-unit scheduling' },
+  { Icon: Hotel, name: 'Multi-family', note: 'Discreet, unit-by-unit scheduling' },
   { Icon: Building2, name: 'Offices & clinics', note: 'After-hours service, no disruption' },
-  { Icon: Store, name: 'Retail & grocery', note: 'Front-of-house safe treatments' },
+  { Icon: Store, name: 'Retail', note: 'Front-of-house safe treatments' },
   { Icon: ClipboardCheck, name: 'Schools & childcare', note: 'Lowest-risk products, full logs' },
 ];
 
@@ -47,13 +47,12 @@ const COMPLIANCE = [
 
 export const Commercial = () => {
   const { services, testimonials } = useSite();
-  const commercial = services.find((s) => s.slug === 'commercial-pest-control');
 
   return (
     <>
       <Meta
         title="Commercial Pest Control"
-        description="Audit-ready commercial pest management for restaurants, warehouses, clinics and property managers across Texas. Digital logs, barcoded devices, after-hours service."
+        description="Audit-ready commercial pest management for restaurants, warehouses, clinics and property managers. Digital logs, barcoded devices, after-hours service."
       />
 
       <PageHero
@@ -66,21 +65,10 @@ export const Commercial = () => {
             that get inspected.
           </>
         }
-        intro="Digital service logs, barcoded device scanning, and documentation formatted for the audits you actually face. From a single restaurant to a 240-unit portfolio."
       >
-        <div className="flex flex-wrap items-center gap-4">
-          <Button to="/contact" size="lg">
-            Request a site assessment
-          </Button>
-          {commercial && (
-            <p className="text-[0.9rem] text-muted">
-              <span className="tabular font-display text-[1.75rem] text-ink">
-                ${commercial.priceFrom}
-              </span>
-              <span className="font-heading font-600">{commercial.unit}</span> to start
-            </p>
-          )}
-        </div>
+        <Button to="/contact" size="lg">
+          Request a site assessment
+        </Button>
       </PageHero>
 
       <Section tone="cream" className="!pt-4">

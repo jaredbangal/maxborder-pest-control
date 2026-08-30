@@ -26,10 +26,9 @@ export const company = {
 };
 
 export const stats = [
-  { value: 42000, suffix: '+', label: 'Homes protected', detail: 'Across 6 states since 2009' },
+  { value: 42000, suffix: '+', label: 'Homes protected', detail: 'Across 6 counties' },
   { value: 4.9, decimals: 1, suffix: '/5', label: 'Average rating', detail: 'From 3,800+ verified reviews' },
-  { value: 48, suffix: 'hr', label: 'Response window', detail: 'Or the return visit is free' },
-  { value: 98, suffix: '%', label: 'Retention rate', detail: 'Customers who renew each year' },
+  { value: 24, suffix: 'hr', label: 'Response window', detail: 'Or the return visit is free' },
 ];
 
 export const services = [
@@ -85,23 +84,6 @@ export const services = [
       'Event-day service for weddings and parties',
     ],
     seasonal: true,
-  },
-  {
-    slug: 'termite-protection',
-    name: 'Termite Protection',
-    icon: 'home',
-    priceFrom: 65,
-    unit: '/mo',
-    summary: 'Continuous monitoring plus a repair guarantee that protects the structure itself.',
-    description:
-      'Termites cause more damage annually than fires and storms combined, and homeowners insurance does not cover it. We install a monitored bait perimeter, inspect it on schedule, and back the whole thing with a damage repair guarantee.',
-    covers: ['Subterranean termites', 'Drywood termites', 'Formosan termites', 'Carpenter ants'],
-    highlights: [
-      'Monitored bait station perimeter',
-      'Annual certified inspection with written report',
-      'Damage repair guarantee up to $250,000',
-      'Real estate transfer inspections',
-    ],
   },
   {
     slug: 'bed-bug-treatment',
@@ -263,16 +245,6 @@ export const pestCategories = [
     examples: ['Mosquitoes', 'Ticks', 'Fleas', 'Wasps', 'Hornets', 'Bed bugs'],
     serviceSlug: 'mosquito-tick-flea',
   },
-  {
-    slug: 'wood-destroying',
-    name: 'Wood-Destroying',
-    icon: 'home',
-    count: '4 species',
-    blurb:
-      'The expensive ones. Insurance will not cover the damage, so the whole plan is built around catching them early.',
-    examples: ['Subterranean termites', 'Drywood termites', 'Carpenter ants'],
-    serviceSlug: 'termite-protection',
-  },
 ];
 
 export const pests = [
@@ -355,14 +327,6 @@ export const faqs = [
     a: 'Standard service is scheduled within 48 hours. Emergencies — active stinging insects near an entrance, a rodent inside the living space, or anything involving an allergy risk — get same-day dispatch whenever a technician is within range.',
   },
   {
-    q: 'What does the guarantee actually cover?',
-    a: 'If a covered pest returns between your scheduled visits, we come back and re-treat at no charge, however many times it takes. There is no visit cap and no fine print about "one free callback." On the Fortress plan, the termite damage repair guarantee covers structural repair up to $250,000.',
-  },
-  {
-    q: 'Am I locked into a contract?',
-    a: 'Plans are month to month after the initial service period, and you can cancel with 30 days notice. We ask for that first period because pest control is cumulative — a single treatment interrupts one life cycle, while a full season breaks the whole population curve.',
-  },
-  {
     q: 'Do I need to be home for the service?',
     a: 'Not for exterior treatments, which is the bulk of the work. You will get a text when the technician is en route and a digital report when they finish. Interior treatments do require access, so we schedule those in a window that works for you.',
   },
@@ -377,6 +341,10 @@ export const faqs = [
   {
     q: 'Is the service eco-friendly?',
     a: 'We practice Integrated Pest Management, which means exclusion, sanitation, and habitat correction come first, and product is the targeted last step rather than the default first one. In practice that means less material applied, placed more precisely. We also route-optimize our fleet, which cut our per-visit fuel use by about a third.',
+  },
+  {
+    q: 'TBD',
+    a: 'TBD',
   },
 ];
 
@@ -400,10 +368,6 @@ export const serviceAreas = [
 ];
 
 export const certifications = [
-  { name: 'BBB Accredited A+', abbr: 'BBB', detail: 'Accredited since 2011' },
   { name: 'QualityPro Certified', abbr: 'QP', detail: 'NPMA standard' },
-  { name: 'EPA Compliant', abbr: 'EPA', detail: 'All products registered' },
   { name: 'Google Reviews 4.9', abbr: '4.9', detail: '3,800+ reviews' },
-  { name: 'GreenPro Certified', abbr: 'GP', detail: 'Eco-responsible' },
-  { name: 'TDA Licensed', abbr: 'TDA', detail: 'License #TX-40219' },
 ];

@@ -29,7 +29,6 @@ export const Testimonials = ({ items }: { items: Testimonial[] }) => (
           Customers keep us.
         </>
       }
-      intro="A 98% annual retention rate is the number we are proudest of — it means the work holds up long after the first visit."
     />
 
     <Reveal delay={120} className="mt-14">

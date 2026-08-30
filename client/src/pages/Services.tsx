@@ -14,7 +14,7 @@ export const Services = () => {
     <>
       <Meta
         title="Pest Control Services"
-        description="General pest control, rodents, mosquitoes and ticks, termites, bed bugs and commercial pest management. Plans from $49/mo with free return visits."
+        description="General pest control, rodents, mosquitoes and ticks, bed bugs and commercial pest management, all with free return visits."
       />
 
       <PageHero

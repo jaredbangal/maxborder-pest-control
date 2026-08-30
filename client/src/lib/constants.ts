@@ -15,6 +15,9 @@ export const NAV_LINKS = [
 /** Secondary links: utility bar on desktop, and the mobile drawer. */
 export const UTILITY_LINKS = [
   { to: '/services', label: 'Services' },
+  { to: '/coverage', label: 'Coverage' },
+  { to: '/how-it-works', label: 'How It Works' },
+  { to: '/faqs', label: 'FAQs' },
   { to: '/pests', label: 'Pest Library' },
   { to: '/service-areas', label: 'Service Areas' },
   { to: '/about', label: 'About' },

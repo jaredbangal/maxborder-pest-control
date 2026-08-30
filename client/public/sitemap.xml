@@ -8,12 +8,13 @@
   <url><loc>https://maxborderpest.com/services/general-pest-control</loc><priority>0.8</priority></url>
   <url><loc>https://maxborderpest.com/services/rodent-control</loc><priority>0.8</priority></url>
   <url><loc>https://maxborderpest.com/services/mosquito-tick-flea</loc><priority>0.8</priority></url>
-  <url><loc>https://maxborderpest.com/services/termite-protection</loc><priority>0.8</priority></url>
   <url><loc>https://maxborderpest.com/services/bed-bug-treatment</loc><priority>0.8</priority></url>
   <url><loc>https://maxborderpest.com/services/commercial-pest-control</loc><priority>0.8</priority></url>
   <url><loc>https://maxborderpest.com/plans</loc><priority>0.9</priority></url>
   <url><loc>https://maxborderpest.com/pests</loc><priority>0.7</priority></url>
   <url><loc>https://maxborderpest.com/about</loc><priority>0.6</priority></url>
   <url><loc>https://maxborderpest.com/contact</loc><priority>0.9</priority></url>
-  <url><loc>https://maxborderpest.com/faq</loc><priority>0.6</priority></url>
+  <url><loc>https://maxborderpest.com/coverage</loc><priority>0.8</priority></url>
+  <url><loc>https://maxborderpest.com/how-it-works</loc><priority>0.8</priority></url>
+  <url><loc>https://maxborderpest.com/faqs</loc><priority>0.6</priority></url>
 </urlset>

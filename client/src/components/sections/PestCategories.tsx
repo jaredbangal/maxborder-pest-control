@@ -135,7 +135,7 @@ export const PestCategories = ({ categories }: { categories: PestCategory[] }) =
           in four groups.
         </>
       }
-      intro="One seasonal plan covers all of them — ants, roaches, rodents, mosquitoes, termites and the rest. Pick the group that matches what you are seeing."
+      intro="One seasonal plan covers all of them — ants, roaches, rodents, mosquitoes and the rest. Pick the group that matches what you are seeing."
     />
 
     <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

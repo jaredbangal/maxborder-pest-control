@@ -264,10 +264,6 @@ export const QuoteForm = ({
           {status === 'sending' ? 'Sending…' : 'Get my free quote'}
         </Button>
 
-        <p className={cn('text-[0.8rem] leading-snug', tone === 'dark' ? 'text-on-inverse/60' : 'text-muted')}>
-          No obligation. We call within one business hour
-          <br className="hidden sm:block" /> during opening times.
-        </p>
       </div>
     </form>
   );

@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { ServiceCard } from '@/components/sections/ServicesSection';
-import { StatsBand } from '@/components/sections/StatsBand';
 import { Process } from '@/components/sections/Process';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { FaqSection } from '@/components/sections/FaqSection';
@@ -22,16 +21,16 @@ const INCLUDED = [
 ];
 
 export const Residential = () => {
-  const { services, plans, testimonials, faqs, process, site } = useSite();
+  const { services, testimonials, faqs, process } = useSite();
 
-  // Everything except the commercial plan is a home service.
+  // Home services only — the commercial plan lives on its own page.
   const homeServices = services.filter((s) => s.slug !== 'commercial-pest-control');
 
   return (
     <>
       <Meta
         title="Residential Pest Control"
-        description="Year-round pest control for Texas homes. Quarterly treatments, free return visits, and licensed technicians. Plans from $49/mo."
+        description="Year-round pest control for your home. Quarterly treatments, free return visits, and licensed technicians."
       />
 
       <PageHero
@@ -44,19 +43,14 @@ export const Residential = () => {
             around your home.
           </>
         }
-        intro="One plan, maintained season by season, covering the 50+ pests that actually turn up at a Texas house. No callout fees, no re-service charges, no contract past the first service period."
+        intro="One plan, maintained season by season, covering the 50+ pests that actually turn up at a house. No callout fees, no re-service charges, no contract past the first service period."
       >
         <div className="flex flex-wrap gap-3">
           <Button to="/contact" size="lg">
             Get my free inspection
           </Button>
-          <Button to="/plans" variant="outline" size="lg">
-            Compare plans
-          </Button>
         </div>
       </PageHero>
-
-      <StatsBand stats={site.stats} />
 
       <Section tone="cream">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
@@ -89,7 +83,7 @@ export const Residential = () => {
         <SectionHeader
           eyebrow="Home services"
           title="Pick what you are dealing with."
-          intro="Each service is priced monthly and backed by the same guarantee."
+          intro="Each one is backed by the same guarantee."
         />
 
         <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -99,15 +93,6 @@ export const Residential = () => {
             </Reveal>
           ))}
         </ul>
-
-        <Reveal delay={140} className="mt-12">
-          <p className="text-[0.95rem] text-muted">
-            Homeowner plans start at ${plans[0]?.price ?? 49}/month.
-          </p>
-          <Button to="/plans" variant="outline" className="mt-4">
-            See all plans
-          </Button>
-        </Reveal>
       </Section>
 
       <Process steps={process.steps} />
