@@ -1,20 +1,19 @@
 # Brand assets
 
+**Not currently used by the site.** The header was reverted to the wordmark-only
+lockup; these files are kept so the mark can be reinstated without redoing the work.
+
 - `logo-original.png` — the artwork as supplied (2000×2000, RGB, **no alpha**).
-- `logo-mark.svg` — the same mark traced to nine exact quadrilaterals, ~660 bytes.
+- `logo-mark.svg` — the same mark traced to nine exact quadrilaterals, ~660 bytes,
+  verified against the original at 96.3% shape agreement.
 
-The site uses the SVG, not the PNG. Two reasons:
+If it goes back in, use the SVG rather than the PNG. Two reasons:
 
-1. The PNG has no transparency, so it would render a white box on the navy
-   header and in dark mode.
-2. The SVG paths use `currentColor`, so the mark takes the lifted orange on
-   navy (where the base orange is only 3.1:1 against the ground) and the base
-   orange on cream.
+1. The PNG has no transparency, so it renders a white box on the navy header
+   and in dark mode.
+2. The SVG paths take `currentColor`, so the mark can pick up the lifted orange
+   on navy — the base orange is only 3.1:1 against that ground.
 
-The live component is `client/src/components/ui/LogoMark.tsx`; `Logo.tsx` is the
-mark plus wordmark lockup. To change the mark, edit the component — the favicon
-(`client/public/favicon.svg`) and social image (`og-image.svg`) carry their own
-copies of the same paths.
-
-Traced geometry was verified against the original at 96.3% shape IoU; the
-remainder is crop alignment in the comparison, not a difference in the shape.
+Size it at **44px or larger**. The internal gaps are ~2.4% of the mark's width,
+so below that they fall under a device pixel and the cube structure closes up
+into a solid blob.

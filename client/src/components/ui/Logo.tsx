@@ -1,67 +1,45 @@
 import { cn } from '@/lib/cn';
-import { LogoMark } from './LogoMark';
 
 type Props = {
-  /** `light` renders for dark backgrounds (the navy header, the footer). */
+  /** `light` renders for dark backgrounds (footer, dark sections). */
   variant?: 'default' | 'light';
   className?: string;
   showTagline?: boolean;
-  /** Hide the wordmark and show the mark alone — used where space is tight. */
-  markOnly?: boolean;
 };
 
 /**
- * The full lockup: the Maxborder mark beside the wordmark. The wordmark is live
- * text rather than an image so it stays crisp at any size, recolours per
- * surface, and is readable by search engines and screen readers.
+ * The Maxborder wordmark, rebuilt as live text rather than an image so it stays
+ * crisp at any size, recolours for dark sections, and is readable by search
+ * engines and screen readers.
  */
-export const Logo = ({
-  variant = 'default',
-  className,
-  showTagline = true,
-  markOnly = false,
-}: Props) => {
-  const onDark = variant === 'light';
+export const Logo = ({ variant = 'default', className, showTagline = true }: Props) => {
+  const borderColor = variant === 'light' ? 'text-on-inverse' : 'text-ink';
+  const taglineColor = variant === 'light' ? 'text-on-inverse/60' : 'text-muted';
 
   return (
-    <span className={cn('inline-flex items-center gap-2.5', className)}>
-      <LogoMark
-        className={cn(
-          // 44/52px, not smaller. The mark's internal gaps are ~2.4% of its
-          // width, so below ~44px they fall under a device pixel and the cube
-          // structure closes up into an orange blob.
-          'size-11 shrink-0 sm:size-[3.25rem]',
-          // The lifted orange keeps its punch on navy, where the base orange
-          // sits at only 3.1:1 against the ground.
-          onDark ? 'text-orange-bright' : 'text-orange'
-        )}
-      />
+    <span className={cn('inline-flex flex-col items-center leading-none', className)}>
+      <span
+        className="font-display text-[1.35rem] tracking-[-0.02em] sm:text-[1.5rem]"
+        aria-hidden="true"
+      >
+        <span className="text-orange">MAX</span>
+        <span className={borderColor}>BORDER</span>
+      </span>
 
-      {!markOnly && (
-        <span className="inline-flex flex-col items-center leading-none">
-          <span
-            className="font-display text-[1.35rem] tracking-[-0.02em] sm:text-[1.5rem]"
-            aria-hidden="true"
-          >
-            <span className={onDark ? 'text-orange-bright' : 'text-orange'}>MAX</span>
-            <span className={onDark ? 'text-on-inverse' : 'text-ink'}>BORDER</span>
-          </span>
-
-          {showTagline && (
-            <span
-              className={cn(
-                'mt-[0.3em] font-heading text-[0.5rem] font-700 uppercase tracking-[0.42em] sm:text-[0.55rem]',
-                // Letter-spacing also applies after the final letter, so the box
-                // is a tracking unit wider than the glyphs; the negative margin
-                // removes that phantom width so the word centres true.
-                '-mr-[0.42em]',
-                onDark ? 'text-on-inverse/60' : 'text-muted'
-              )}
-              aria-hidden="true"
-            >
-              Pest Control
-            </span>
+      {showTagline && (
+        <span
+          className={cn(
+            'mt-[0.3em] font-heading text-[0.5rem] font-700 uppercase tracking-[0.42em] sm:text-[0.55rem]',
+            // Letter-spacing also applies AFTER the final letter, so the text
+            // box is one full tracking unit wider than the glyphs. Centering
+            // the box would leave the word visibly left of centre; the negative
+            // right margin removes that phantom width so it centres true.
+            '-mr-[0.42em]',
+            taglineColor
           )}
+          aria-hidden="true"
+        >
+          Pest Control
         </span>
       )}
 
