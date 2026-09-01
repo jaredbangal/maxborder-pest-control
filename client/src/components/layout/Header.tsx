@@ -54,6 +54,14 @@ export const Header = () => {
             </p>
 
             <div className="flex items-center gap-5">
+              <a
+                href={PHONE_HREF}
+                className="hidden items-center gap-2 font-heading text-[0.8rem] font-700 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:text-orange-bright xl:flex"
+              >
+                <Phone className="size-3.5 text-orange-bright" aria-hidden="true" />
+                {PHONE}
+              </a>
+
               <nav aria-label="Secondary">
                 <ul className="flex items-center gap-5">
                   {UTILITY_LINKS.map((link) => (
@@ -73,91 +81,83 @@ export const Header = () => {
                   ))}
                 </ul>
               </nav>
-
-              {/* Top-right corner of the page. */}
-              <ThemeToggle tone="inverse" className="size-9" />
             </div>
           </div>
         </div>
 
-        {/* Main row: logo left, three tabs centred, actions right. */}
-        <div className="flex items-center gap-6 px-5 sm:px-8 lg:px-12">
-          <Link
-            to="/"
-            aria-label="Maxborder Pest Control — home"
-            className={cn(
-              'shrink-0 transition-[padding] duration-[var(--dur-base)]',
-              scrolled ? 'py-3' : 'py-4'
-            )}
-          >
-            <Logo variant="light" />
-          </Link>
-
-          {/* Segmented tabs rather than plain links: the current section reads
-              at a glance instead of relying on a 2px underline. */}
-          <nav className="mx-auto hidden lg:block" aria-label="Primary">
-            <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
-              {NAV_LINKS.map((link) => {
-                const active = pathname.startsWith(link.to);
-                return (
-                  <li key={link.to}>
-                    <NavLink
-                      to={link.to}
-                      aria-current={active ? 'page' : undefined}
-                      className={cn(
-                        'flex min-h-[2.75rem] items-center whitespace-nowrap rounded-full px-6',
-                        'font-heading text-[0.8rem] font-700 uppercase tracking-[0.1em]',
-                        'transition-[background-color,color] duration-[var(--dur-base)]',
-                        active
-                          ? 'bg-orange text-on-orange shadow-[var(--shadow-orange)]'
-                          : 'text-on-inverse/70 hover:bg-on-inverse/10 hover:text-on-inverse'
-                      )}
-                    >
-                      {link.label}
-                    </NavLink>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-
-          <div className="ml-auto flex items-center gap-3 lg:ml-0">
-            <a
-              href={PHONE_HREF}
-              className="hidden items-center gap-2 font-heading text-[0.85rem] font-700 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:text-orange-bright xl:flex"
-            >
-              <Phone className="size-4 text-orange-bright" aria-hidden="true" />
-              {PHONE}
-            </a>
-
-            <span className="hidden sm:block">
-              <Button to="/contact" size="sm">
-                Free Quote
-              </Button>
-            </span>
-
-            <a
-              href={PHONE_HREF}
-              aria-label={`Call us at ${PHONE}`}
-              className="grid size-11 cursor-pointer place-items-center rounded-full bg-orange text-on-orange transition-colors duration-[var(--dur-fast)] hover:bg-orange-deep sm:hidden"
-            >
-              <Phone className="size-4" aria-hidden="true" />
-            </a>
+        {/*
+          Three columns so the logo is optically centred: the side columns are
+          both 1fr, so the middle item lands on the true centre of the row no
+          matter how wide the tabs or the actions are.
+        */}
+        <div
+          className={cn(
+            'grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:px-8 lg:px-12',
+            scrolled ? 'py-2' : 'py-3'
+          )}
+        >
+          {/* Left: tabs on desktop, menu button on mobile */}
+          <div className="flex items-center justify-start">
+            <nav className="hidden xl:block" aria-label="Primary">
+              <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
+                {NAV_LINKS.map((link) => {
+                  const active = pathname.startsWith(link.to);
+                  return (
+                    <li key={link.to}>
+                      <NavLink
+                        to={link.to}
+                        aria-current={active ? 'page' : undefined}
+                        className={cn(
+                          'flex min-h-[2.75rem] items-center whitespace-nowrap rounded-full px-5',
+                          'font-heading text-[0.78rem] font-700 uppercase tracking-[0.1em]',
+                          'transition-[background-color,color] duration-[var(--dur-base)]',
+                          active
+                            ? 'bg-orange text-on-orange shadow-[var(--shadow-orange)]'
+                            : 'text-on-inverse/70 hover:bg-on-inverse/10 hover:text-on-inverse'
+                        )}
+                      >
+                        {link.label}
+                      </NavLink>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
 
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
               aria-expanded={menuOpen}
-              className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-on-inverse/25 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:border-on-inverse hover:bg-on-inverse hover:text-inverse lg:hidden"
+              className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-on-inverse/45 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:border-on-inverse hover:bg-on-inverse hover:text-inverse xl:hidden"
             >
               <Menu className="size-5" aria-hidden="true" />
             </button>
+          </div>
 
-            {/* Below lg the utility row is hidden, so the toggle lives here. */}
-            <ThemeToggle tone="inverse" className="lg:hidden" />
+          {/* Centre: the wordmark */}
+          <Link
+            to="/"
+            aria-label="Maxborder Pest Control — home"
+            // min-h keeps the tap target at 44px; the old vertical padding
+            // that provided it went when the logo moved into the grid.
+            className="flex min-h-[2.75rem] items-center justify-self-center py-1"
+          >
+            <Logo variant="light" />
+          </Link>
+
+          {/* Right: actions, ending with the day/night switch */}
+          <div className="flex items-center justify-end gap-3">
+            <span className="hidden sm:block">
+              <Button to="/contact" size="sm">
+                Free Quote
+              </Button>
+            </span>
+
+            <ThemeToggle tone="inverse" showLabel />
           </div>
         </div>
+
       </header>
 
       <MobileNav open={menuOpen} onClose={() => setMenuOpen(false)} />
