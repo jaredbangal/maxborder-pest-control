@@ -140,8 +140,6 @@ export const Header = () => {
               </Button>
             </span>
 
-            <ThemeToggle tone="inverse" showLabel />
-
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
@@ -151,6 +149,10 @@ export const Header = () => {
             >
               <Menu className="size-5" aria-hidden="true" />
             </button>
+
+            {/* Last in the row at every width, so the day/night switch is
+                always the top-right corner control. */}
+            <ThemeToggle tone="inverse" showLabel />
           </div>
         </div>
 
