@@ -86,22 +86,37 @@ export const Header = () => {
           </div>
         </div>
 
-        {/* Logo left, tabs centred, actions right. */}
+        {/* Mirrored layout: actions left, tabs centred, logo hard right. */}
         <div
           className={cn(
-            'grid grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:px-8 lg:px-12',
+            // Two columns until the tabs appear: a display:none grid item is
+            // removed from the flow entirely, so a fixed three-column track
+            // left an empty third column and a trailing gap that nudged the
+            // logo 16px in from the edge.
+            'grid grid-cols-[auto_1fr] items-center gap-4 xl:grid-cols-[auto_1fr_auto]',
+            'px-5 sm:px-8 lg:px-12',
             scrolled ? 'py-2.5' : 'py-3.5'
           )}
         >
-          <Link
-            to="/"
-            aria-label="Maxborder Pest Control — home"
-            className="flex min-h-[2.75rem] items-center"
-          >
-            {/* The wordmark would crowd the menu button on small phones. */}
-            <Logo variant="light" className="hidden sm:inline-flex" />
-            <Logo variant="light" markOnly className="sm:hidden" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={menuOpen}
+              className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-on-inverse/45 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:border-on-inverse hover:bg-on-inverse hover:text-inverse xl:hidden"
+            >
+              <Menu className="size-5" aria-hidden="true" />
+            </button>
+
+            <span className="hidden sm:block">
+              <Button to="/contact" size="sm">
+                Free Quote
+              </Button>
+            </span>
+
+            <ThemeToggle tone="inverse" showLabel />
+          </div>
 
           <nav className="hidden justify-self-center xl:block" aria-label="Primary">
             <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
@@ -129,25 +144,22 @@ export const Header = () => {
             </ul>
           </nav>
 
-          <div className="flex items-center justify-end gap-3">
+          <Link
+            to="/"
+            aria-label="Maxborder Pest Control — home"
+            className="flex min-h-[2.75rem] items-center justify-self-end"
+          >
+            {/* Wrapped rather than passing `hidden` to Logo: Logo's own root
+                carries `inline-flex`, and two display utilities in the same
+                layer fight — so both variants rendered at once and the lockup
+                overflowed the viewport on small phones. */}
             <span className="hidden sm:block">
-              <Button to="/contact" size="sm">
-                Free Quote
-              </Button>
+              <Logo variant="light" />
             </span>
-
-            <ThemeToggle tone="inverse" showLabel />
-
-            <button
-              type="button"
-              onClick={() => setMenuOpen(true)}
-              aria-label="Open menu"
-              aria-expanded={menuOpen}
-              className="grid size-11 cursor-pointer place-items-center rounded-full border-2 border-on-inverse/45 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:border-on-inverse hover:bg-on-inverse hover:text-inverse xl:hidden"
-            >
-              <Menu className="size-5" aria-hidden="true" />
-            </button>
-          </div>
+            <span className="sm:hidden">
+              <Logo variant="light" markOnly />
+            </span>
+          </Link>
         </div>
 
       </header>
