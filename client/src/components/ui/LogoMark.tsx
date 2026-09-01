@@ -1,0 +1,28 @@
+import { cn } from '@/lib/cn';
+
+/**
+ * The Maxborder mark, traced from the supplied artwork into exact polygons
+ * (nine quadrilaterals, ~700 bytes). Kept as vector rather than the original
+ * PNG for two reasons: the PNG has no alpha, so it would show a white box on
+ * the navy header, and paths take `currentColor` so the mark can pick up the
+ * right orange for whichever surface it sits on.
+ */
+export const LogoMark = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 100 100"
+    fill="currentColor"
+    className={cn('block', className)}
+    role="img"
+    aria-label="Maxborder"
+  >
+    <path d="M53.63 20.15 L69.27 11.14 L93.30 25.03 L93.30 42.93 Z" />
+    <path d="M25.84 13.89 L49.87 0.00 L65.39 8.89 L26.22 31.66 Z" />
+    <path d="M6.70 24.91 L22.09 16.27 L21.96 61.58 L6.70 52.69 Z" />
+    <path d="M28.22 34.79 L49.87 22.40 L71.78 35.29 L49.75 47.68 Z" />
+    <path d="M51.75 51.06 L73.65 38.67 L73.65 63.83 L51.63 76.47 Z" />
+    <path d="M6.70 57.20 L45.87 79.85 L30.35 88.74 L6.70 75.09 Z" />
+    <path d="M34.36 90.86 L73.65 68.34 L73.65 86.36 L50.00 100.00 Z" />
+    <path d="M25.84 38.17 L48.00 51.06 L47.75 76.35 L25.84 63.83 Z" />
+    <path d="M77.53 38.42 L93.30 47.56 L93.30 74.97 L77.78 83.98 Z" />
+  </svg>
+);
