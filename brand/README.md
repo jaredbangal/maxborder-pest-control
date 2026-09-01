@@ -1,19 +1,15 @@
 # Brand assets
 
-**Not currently used by the site.** The header was reverted to the wordmark-only
-lockup; these files are kept so the mark can be reinstated without redoing the work.
-
 - `logo-original.png` — the artwork as supplied (2000×2000, RGB, **no alpha**).
-- `logo-mark.svg` — the same mark traced to nine exact quadrilaterals, ~660 bytes,
-  verified against the original at 96.3% shape agreement.
+- `logo-mark.svg` — the same badge traced to a plate plus a 14-vertex
+  letterform, ~350 bytes, verified against the original at 99.3% shape agreement.
 
-If it goes back in, use the SVG rather than the PNG. Two reasons:
+The site uses the SVG, not the PNG. The PNG has no transparency and its black
+canvas is opaque, so dropping it into the header would draw a black box around
+the badge. As paths, the plate and the letter each take a palette token, so the
+badge renders correctly on the navy header and in both themes.
 
-1. The PNG has no transparency, so it renders a white box on the navy header
-   and in dark mode.
-2. The SVG paths take `currentColor`, so the mark can pick up the lifted orange
-   on navy — the base orange is only 3.1:1 against that ground.
-
-Size it at **44px or larger**. The internal gaps are ~2.4% of the mark's width,
-so below that they fall under a device pixel and the cube structure closes up
-into a solid blob.
+The live component is `client/src/components/ui/LogoMark.tsx`; `Logo.tsx` is the
+badge plus wordmark lockup. The favicon (`client/public/favicon.svg`) and the
+social image (`og-image.svg`) carry their own copies of the same path, so a
+change to the mark needs updating in those two files as well.

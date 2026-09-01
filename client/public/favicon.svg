@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="10" fill="#F4EEE0"/>
-  <circle cx="32" cy="32" r="25" fill="none" stroke="#C2410C" stroke-width="3" stroke-dasharray="5 5"/>
-  <text x="32" y="42" font-family="Archivo Black, Arial Black, sans-serif" font-size="30" font-weight="900" fill="#12203A" text-anchor="middle">M</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#F4EDE0"/><g transform="translate(0 11.23)"><rect width="100" height="77.54" fill="#F4EDE0"/><path d="M8.19 8.65 L40.06 8.65 L50.00 41.35 L60.02 8.65 L91.88 8.65 L91.88 68.97 L69.50 68.97 L69.42 35.51 L59.10 68.97 L40.97 68.97 L30.65 35.43 L30.58 68.97 L8.19 68.97 L8.19 8.65 Z" fill="#C2410C"/></g></svg>
