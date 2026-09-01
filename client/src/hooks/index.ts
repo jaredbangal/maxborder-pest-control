@@ -102,13 +102,14 @@ export const useCountUp = (end: number, { duration = 1800, decimals = 0 } = {}) 
 };
 
 /**
- * Header behaviour: condense once past the fold, and hide when scrolling down
- * so the reading area stays clear on phones.
+ * Header behaviour: condense once past the fold.
+ *
+ * This used to also hide the header while scrolling down to free up reading
+ * space. That was removed — it took the logo and company name off screen for
+ * most of the page, which is the opposite of what a persistent header is for.
  */
 export const useScrollHeader = (threshold = 24) => {
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const lastY = useRef(0);
 
   useEffect(() => {
     let ticking = false;
@@ -118,11 +119,7 @@ export const useScrollHeader = (threshold = 24) => {
       ticking = true;
 
       requestAnimationFrame(() => {
-        const y = window.scrollY;
-        setScrolled(y > threshold);
-        // Only hide well below the fold, and never while the menu sits at the top.
-        setHidden(y > 240 && y > lastY.current);
-        lastY.current = y;
+        setScrolled(window.scrollY > threshold);
         ticking = false;
       });
     };
@@ -131,7 +128,7 @@ export const useScrollHeader = (threshold = 24) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, [threshold]);
 
-  return { scrolled, hidden };
+  return { scrolled };
 };
 
 /** Locks background scroll (drawer/modal) without the iOS jump-to-top bug. */

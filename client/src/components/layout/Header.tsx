@@ -11,7 +11,7 @@ import { MobileNav } from './MobileNav';
 import { NAV_LINKS, PHONE, PHONE_HREF, UTILITY_LINKS } from '@/lib/constants';
 
 export const Header = () => {
-  const { scrolled, hidden } = useScrollHeader();
+  const { scrolled } = useScrollHeader();
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -30,10 +30,11 @@ export const Header = () => {
         orange above navy above orange, which just looks like banding.
       */}
       <header
+        // Always on screen. It condenses on scroll rather than sliding away,
+        // so the logo and name stay visible the whole way down the page.
         className={cn(
           'fixed inset-x-0 top-0 bg-inverse text-on-inverse',
-          'transition-[transform,box-shadow] duration-[var(--dur-slow)] ease-[var(--ease-out-expo)]',
-          hidden && !menuOpen ? '-translate-y-full' : 'translate-y-0',
+          'transition-[box-shadow] duration-[var(--dur-slow)] ease-[var(--ease-out-expo)]',
           scrolled && 'shadow-[var(--shadow-lg)]'
         )}
         style={{ zIndex: 'var(--z-header)' }}
