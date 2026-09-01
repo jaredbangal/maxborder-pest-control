@@ -87,27 +87,30 @@ export const Header = () => {
         </div>
 
         {/*
-          Logo left, tabs centred, actions right. The side columns are both 1fr
-          so the tabs land on the true centre; below xl the nav is display:none
-          and a hidden grid item leaves the flow entirely, so the track drops to
-          two columns to avoid an empty third and its trailing gap.
+          Flex with equal-weight side groups rather than a grid: the logo group
+          and the actions group are both flex-1, so the actions are pinned right
+          and the tabs sit centred between them. A grid track was doing this
+          before, but a display:none grid item leaves the flow entirely and the
+          column count has to be kept in sync with what is rendered — one more
+          thing to get wrong. Flex has no such coupling.
         */}
         <div
           className={cn(
-            'grid grid-cols-[1fr_auto] items-center gap-4 xl:grid-cols-[1fr_auto_1fr]',
-            'px-5 sm:px-8 lg:px-12',
+            'flex items-center gap-4 px-5 sm:px-8 lg:px-12',
             scrolled ? 'py-2.5' : 'py-3.5'
           )}
         >
-          <Link
-            to="/"
-            aria-label="Maxborder Pest Control — home"
-            className="flex min-h-[2.75rem] items-center justify-self-start"
-          >
-            <Logo variant="light" />
-          </Link>
+          <div className="flex flex-1 justify-start">
+            <Link
+              to="/"
+              aria-label="Maxborder Pest Control — home"
+              className="flex min-h-[2.75rem] items-center"
+            >
+              <Logo variant="light" />
+            </Link>
+          </div>
 
-          <nav className="hidden justify-self-center xl:block" aria-label="Primary">
+          <nav className="hidden flex-none xl:block" aria-label="Primary">
             <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
               {NAV_LINKS.map((link) => {
                 const active = pathname.startsWith(link.to);
@@ -133,7 +136,7 @@ export const Header = () => {
             </ul>
           </nav>
 
-          <div className="flex items-center justify-end gap-3 justify-self-end">
+          <div className="flex flex-1 items-center justify-end gap-3">
             <span className="hidden sm:block">
               <Button to="/contact" size="sm">
                 Free Quote
