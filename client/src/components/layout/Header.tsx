@@ -39,15 +39,7 @@ export const Header = () => {
         )}
         style={{ zIndex: 'var(--z-header)' }}
       >
-        {/*
-          Top strip. Always rendered so the day/night switch keeps its place in
-          the page's top-right corner — the promo inside it is dismissible and
-          hides on scroll, but the strip and the switch stay.
-        */}
-        <div className="flex items-center gap-3 border-b border-on-inverse/12 px-3 sm:px-5 lg:px-8">
-          {!scrolled && <AnnouncementBar />}
-          <ThemeToggle tone="inverse" showLabel className="ml-auto my-1.5 shrink-0" />
-        </div>
+        {!scrolled && <AnnouncementBar />}
 
         {/* Utility row — secondary links and the phone number. */}
         <div className="hidden border-b border-on-inverse/12 lg:block">
@@ -157,6 +149,10 @@ export const Header = () => {
             >
               <Menu className="size-5" aria-hidden="true" />
             </button>
+
+            {/* Last in the row, so it is the right-hand corner control at every
+                width — and it needs no strip of its own to live in. */}
+            <ThemeToggle tone="inverse" showLabel />
           </div>
         </div>
 

@@ -30,26 +30,28 @@ export const AnnouncementBar = () => {
   if (!visible) return null;
 
   return (
-    <div className="flex min-w-0 flex-1 items-center justify-center gap-2 py-2.5 text-center">
-      <p className="min-w-0 truncate text-[0.78rem] font-500 leading-snug sm:text-[0.8rem]">
-        <span className="font-heading font-700 uppercase tracking-[0.12em] text-orange-bright">
-          Season Special
-        </span>
-        <span aria-hidden="true" className="mx-2 opacity-50">
-          /
-        </span>
-        Free inspection with your first treatment
-        <span className="hidden sm:inline"> — call us for a quote.</span>
-      </p>
+    <div className="relative border-b border-on-inverse/12 bg-inverse text-on-inverse">
+      <div className="flex items-center justify-center gap-2 px-14 py-2.5 text-center">
+        <p className="text-[0.78rem] font-500 leading-snug sm:text-[0.8rem]">
+          <span className="font-heading font-700 uppercase tracking-[0.12em] text-orange-bright">
+            Season Special
+          </span>
+          <span aria-hidden="true" className="mx-2 opacity-50">
+            /
+          </span>
+          Free inspection with your first treatment
+          <span className="hidden sm:inline"> — call us for a quote.</span>
+        </p>
 
-      <button
-        type="button"
-        onClick={dismiss}
-        aria-label="Dismiss announcement"
-        className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-full transition-colors duration-[var(--dur-fast)] hover:bg-on-inverse/15"
-      >
-        <X className="size-4" aria-hidden="true" />
-      </button>
+        <button
+          type="button"
+          onClick={dismiss}
+          aria-label="Dismiss announcement"
+          className="absolute right-3 grid size-11 cursor-pointer place-items-center rounded-full transition-colors duration-[var(--dur-fast)] hover:bg-on-inverse/15"
+        >
+          <X className="size-4" aria-hidden="true" />
+        </button>
+      </div>
     </div>
   );
 };
