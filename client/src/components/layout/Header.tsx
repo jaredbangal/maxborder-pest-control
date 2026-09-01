@@ -89,7 +89,7 @@ export const Header = () => {
         <div
           className={cn(
             'grid grid-cols-[auto_1fr_auto] items-center gap-4 px-5 sm:px-8 lg:px-12',
-            scrolled ? 'py-2' : 'py-3'
+            scrolled ? 'py-2.5' : 'py-3.5'
           )}
         >
           <Link

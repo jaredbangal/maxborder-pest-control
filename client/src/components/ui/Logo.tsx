@@ -27,7 +27,10 @@ export const Logo = ({
     <span className={cn('inline-flex items-center gap-2.5', className)}>
       <LogoMark
         className={cn(
-          'size-8 shrink-0 sm:size-9',
+          // 44/52px, not smaller. The mark's internal gaps are ~2.4% of its
+          // width, so below ~44px they fall under a device pixel and the cube
+          // structure closes up into an orange blob.
+          'size-11 shrink-0 sm:size-[3.25rem]',
           // The lifted orange keeps its punch on navy, where the base orange
           // sits at only 3.1:1 against the ground.
           onDark ? 'text-orange-bright' : 'text-orange'
