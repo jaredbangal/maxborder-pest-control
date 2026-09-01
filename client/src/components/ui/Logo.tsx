@@ -24,10 +24,10 @@ export const Logo = ({
   const onDark = variant === 'light';
 
   return (
-    <span className={cn('inline-flex items-center gap-3', className)}>
+    <span className={cn('inline-flex items-center gap-2.5', className)}>
       {/* The badge already carries its own cream plate, so it needs no extra
           treatment on the navy header. */}
-      <LogoMark className="h-9 w-auto shrink-0 sm:h-11" />
+      <LogoMark className="h-7 w-auto shrink-0 sm:h-9" />
 
       {!markOnly && (
         <span className="inline-flex flex-col items-center leading-none">

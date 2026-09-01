@@ -41,7 +41,7 @@ export const Header = () => {
       >
         {!scrolled && <AnnouncementBar />}
 
-        {/* Utility row — collapses on scroll. Secondary links only. */}
+        {/* Utility row — secondary links and the phone number. */}
         <div className="hidden border-b border-on-inverse/12 lg:block">
           <div
             className={cn(
@@ -87,43 +87,60 @@ export const Header = () => {
         </div>
 
         {/*
-          Three columns so the logo is optically centred: the side columns are
-          both 1fr, so the middle item lands on the true centre of the row no
-          matter how wide the tabs or the actions are.
+          Logo left, tabs centred, actions right. The side columns are both 1fr
+          so the tabs land on the true centre; below xl the nav is display:none
+          and a hidden grid item leaves the flow entirely, so the track drops to
+          two columns to avoid an empty third and its trailing gap.
         */}
         <div
           className={cn(
-            'grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:px-8 lg:px-12',
-            scrolled ? 'py-2' : 'py-3'
+            'grid grid-cols-[1fr_auto] items-center gap-4 xl:grid-cols-[1fr_auto_1fr]',
+            'px-5 sm:px-8 lg:px-12',
+            scrolled ? 'py-2.5' : 'py-3.5'
           )}
         >
-          {/* Left: tabs on desktop, menu button on mobile */}
-          <div className="flex items-center justify-start">
-            <nav className="hidden xl:block" aria-label="Primary">
-              <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
-                {NAV_LINKS.map((link) => {
-                  const active = pathname.startsWith(link.to);
-                  return (
-                    <li key={link.to}>
-                      <NavLink
-                        to={link.to}
-                        aria-current={active ? 'page' : undefined}
-                        className={cn(
-                          'flex min-h-[2.75rem] items-center whitespace-nowrap rounded-full px-5',
-                          'font-heading text-[0.78rem] font-700 uppercase tracking-[0.1em]',
-                          'transition-[background-color,color] duration-[var(--dur-base)]',
-                          active
-                            ? 'bg-orange text-on-orange shadow-[var(--shadow-orange)]'
-                            : 'text-on-inverse/70 hover:bg-on-inverse/10 hover:text-on-inverse'
-                        )}
-                      >
-                        {link.label}
-                      </NavLink>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
+          <Link
+            to="/"
+            aria-label="Maxborder Pest Control — home"
+            className="flex min-h-[2.75rem] items-center justify-self-start"
+          >
+            <Logo variant="light" />
+          </Link>
+
+          <nav className="hidden justify-self-center xl:block" aria-label="Primary">
+            <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
+              {NAV_LINKS.map((link) => {
+                const active = pathname.startsWith(link.to);
+                return (
+                  <li key={link.to}>
+                    <NavLink
+                      to={link.to}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(
+                        'flex min-h-[2.75rem] items-center whitespace-nowrap rounded-full px-5',
+                        'font-heading text-[0.78rem] font-700 uppercase tracking-[0.1em]',
+                        'transition-[background-color,color] duration-[var(--dur-base)]',
+                        active
+                          ? 'bg-orange text-on-orange shadow-[var(--shadow-orange)]'
+                          : 'text-on-inverse/70 hover:bg-on-inverse/10 hover:text-on-inverse'
+                      )}
+                    >
+                      {link.label}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className="flex items-center justify-end gap-3 justify-self-end">
+            <span className="hidden sm:block">
+              <Button to="/contact" size="sm">
+                Free Quote
+              </Button>
+            </span>
+
+            <ThemeToggle tone="inverse" showLabel />
 
             <button
               type="button"
@@ -134,28 +151,6 @@ export const Header = () => {
             >
               <Menu className="size-5" aria-hidden="true" />
             </button>
-          </div>
-
-          {/* Centre: the wordmark */}
-          <Link
-            to="/"
-            aria-label="Maxborder Pest Control — home"
-            // min-h keeps the tap target at 44px; the old vertical padding
-            // that provided it went when the logo moved into the grid.
-            className="flex min-h-[2.75rem] items-center justify-self-center py-1"
-          >
-            <Logo variant="light" />
-          </Link>
-
-          {/* Right: actions, ending with the day/night switch */}
-          <div className="flex items-center justify-end gap-3">
-            <span className="hidden sm:block">
-              <Button to="/contact" size="sm">
-                Free Quote
-              </Button>
-            </span>
-
-            <ThemeToggle tone="inverse" showLabel />
           </div>
         </div>
 
