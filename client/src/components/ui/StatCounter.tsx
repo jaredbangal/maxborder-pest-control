@@ -19,7 +19,7 @@ export const StatCounter = ({
       : Math.round(value).toLocaleString('en-US');
 
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn('relative text-center', className)}>
       <p
         className={cn(
           'tabular font-display text-[clamp(2.5rem,6vw,4rem)] leading-none',

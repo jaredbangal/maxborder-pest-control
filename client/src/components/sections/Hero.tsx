@@ -19,7 +19,7 @@ export const Hero = () => (
       className="pointer-events-none absolute right-[-10%] top-[-5%] hidden size-[46rem] rounded-full lg:block"
       style={{
         background:
-          'radial-gradient(circle, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.05) 45%, transparent 70%)',
+          'radial-gradient(circle, rgba(194,65,12,0.10) 0%, rgba(194,65,12,0.04) 45%, transparent 70%)',
       }}
     />
 

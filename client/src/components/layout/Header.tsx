@@ -8,6 +8,7 @@ import { Logo } from '@/components/ui/Logo';
 import { ThemeToggle } from './ThemeToggle';
 import { AnnouncementBar } from './AnnouncementBar';
 import { MobileNav } from './MobileNav';
+import { NavDropdown } from './NavDropdown';
 import { NAV_LINKS, PHONE, PHONE_HREF, UTILITY_LINKS } from '@/lib/constants';
 
 export const Header = () => {
@@ -112,27 +113,16 @@ export const Header = () => {
 
           <nav className="hidden flex-none xl:block" aria-label="Primary">
             <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
-              {NAV_LINKS.map((link) => {
-                const active = pathname.startsWith(link.to);
-                return (
-                  <li key={link.to}>
-                    <NavLink
-                      to={link.to}
-                      aria-current={active ? 'page' : undefined}
-                      className={cn(
-                        'flex min-h-[2.75rem] items-center whitespace-nowrap rounded-full px-5',
-                        'font-heading text-[0.78rem] font-700 uppercase tracking-[0.1em]',
-                        'transition-[background-color,color] duration-[var(--dur-base)]',
-                        active
-                          ? 'bg-orange text-on-orange shadow-[var(--shadow-orange)]'
-                          : 'text-on-inverse/70 hover:bg-on-inverse/10 hover:text-on-inverse'
-                      )}
-                    >
-                      {link.label}
-                    </NavLink>
-                  </li>
-                );
-              })}
+              {NAV_LINKS.map((link) => (
+                <NavDropdown
+                  key={link.to}
+                  to={link.to}
+                  label={link.label}
+                  blurb={link.blurb}
+                  items={link.items}
+                  active={pathname.startsWith(link.to)}
+                />
+              ))}
             </ul>
           </nav>
 

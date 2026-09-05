@@ -38,11 +38,11 @@
   --color-inverse: #12203a;
   --color-on-inverse: #f4eee0; /* 14.03:1 on the light-theme inverse */
 
-  /* Hero panel. Text on it must be PURE white: at this orange, white is 5.18:1
-     but cream is only 4.48 and white at 88% is 4.35 — both fail AA. Do not
-     soften hero copy with opacity. */
-  --color-hero: #c2410c;
-  --color-on-hero: #ffffff; /* 5.18:1 light · 7.88:1 dark */
+  /* Hero panel: white ground, orange type. 5.18:1 — the same pair as before,
+     inverted. Do not soften hero copy with opacity; the ratio has no headroom
+     to give away. */
+  --color-hero: #ffffff;
+  --color-on-hero: #c2410c;
 
 /* --- Semantic --- */
   /* Alpha floors, computed against #12203a and #faf6ec respectively:
@@ -114,8 +114,8 @@
 
     --color-inverse: #1e2c3c;
     --color-on-inverse: #ede7da;
-    --color-hero: #8f3410; /* deeper at night so the panel is not glaring */
-    --color-on-hero: #ffffff;
+    --color-hero: #0e1720; /* a white panel would glare at night */
+    --color-on-hero: #e8823a; /* 6.61:1 on that ground */
 
     --color-success: #5fd09b;
     --color-warning: #e0a548;
@@ -145,8 +145,8 @@
 
   --color-inverse: #1e2c3c;
   --color-on-inverse: #ede7da;
-  --color-hero: #8f3410; /* deeper at night so the panel is not glaring */
-  --color-on-hero: #ffffff;
+  --color-hero: #0e1720;
+  --color-on-hero: #e8823a;
 
   --color-success: #5fd09b;
   --color-warning: #e0a548;
