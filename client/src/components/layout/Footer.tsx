@@ -33,7 +33,7 @@ export const Footer = ({ demo }: { demo?: boolean }) => (
     <Container className="py-16 lg:py-20">
       <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16">
         <div>
-          <Logo variant="light" />
+          <Logo variant="light" className="h-12" />
 
           <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-on-inverse/60">
             Licensed, guaranteed pest control for homes and businesses. A treated perimeter,

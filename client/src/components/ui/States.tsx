@@ -6,7 +6,7 @@ import { Logo } from './Logo';
 export const PageLoader = () => (
   <div className="grid min-h-dvh place-items-center bg-cream px-6">
     <div className="flex flex-col items-center gap-6" role="status" aria-live="polite">
-      <Logo />
+      <Logo className="h-14" />
       <span className="relative flex size-3">
         <span className="animate-pulse-ring absolute inline-flex size-full rounded-full bg-orange" />
         <span className="relative inline-flex size-3 rounded-full bg-orange" />

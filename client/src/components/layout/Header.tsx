@@ -107,7 +107,7 @@ export const Header = () => {
               aria-label="Maxborder Pest Control — home"
               className="flex min-h-[2.75rem] items-center"
             >
-              <Logo variant="light" />
+              <Logo variant="light" className="h-8 sm:h-10 lg:h-12" />
             </Link>
           </div>
 

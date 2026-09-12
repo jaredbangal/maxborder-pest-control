@@ -88,7 +88,7 @@ export const MobileNav = ({ open, onClose }: { open: boolean; onClose: () => voi
         style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
         <div className="flex items-center justify-between border-b border-ink/12 px-6 py-5">
-          <Logo showTagline={false} />
+          <Logo className="h-9" />
 
           <button
             ref={closeRef}

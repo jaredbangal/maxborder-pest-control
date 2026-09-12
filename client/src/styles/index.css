@@ -337,6 +337,37 @@
 }
 
 /* ============================================================
+   LOGO TWINS
+   Where the logo sits on the page ground, both lettering colours
+   are rendered and these rules show the one that suits the ground.
+   Same three-state pattern as the palette: system dark unless an
+   explicit light choice is stamped, then an explicit dark stamp.
+   Kept as plain classes — a Tailwind display utility on the same
+   element would fight these in the cascade.
+   ============================================================ */
+@layer components {
+  .logo-on-dark-ground {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .logo-on-light-ground {
+      display: none;
+    }
+    :root:not([data-theme='light']) .logo-on-dark-ground {
+      display: block;
+    }
+  }
+
+  :root[data-theme='dark'] .logo-on-light-ground {
+    display: none;
+  }
+  :root[data-theme='dark'] .logo-on-dark-ground {
+    display: block;
+  }
+}
+
+/* ============================================================
    KEYFRAMES
    ============================================================ */
 @keyframes marquee-x {

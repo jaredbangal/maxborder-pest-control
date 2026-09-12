@@ -1,63 +1,57 @@
 import { cn } from '@/lib/cn';
-import { LogoMark } from './LogoMark';
-
-type Props = {
-  /** `light` renders for dark backgrounds (footer, dark sections). */
-  variant?: 'default' | 'light';
-  className?: string;
-  showTagline?: boolean;
-  /** Hide the wordmark and show the badge alone — used where space is tight. */
-  markOnly?: boolean;
-};
 
 /**
- * The full lockup: the M badge beside the wordmark. The wordmark is live text
- * rather than an image so it stays crisp at any size, recolours per surface,
- * and is readable by search engines and screen readers.
+ * The approved lockup (brand/kit), simplified and trimmed to its artwork bounds
+ * so it carries no dead canvas. Served as static files rather than inlined, so
+ * the ~20KB of path data stays out of the JavaScript bundle and is cached once.
  */
-export const Logo = ({
-  variant = 'default',
-  className,
-  showTagline = true,
-  markOnly = false,
-}: Props) => {
-  const onDark = variant === 'light';
+const LOCKUP = {
+  width: 1534,
+  height: 347,
+  onDark: '/brand/maxborder-on-dark.svg',
+  onLight: '/brand/maxborder-on-light.svg',
+} as const;
 
-  return (
-    <span className={cn('inline-flex items-center gap-2.5', className)}>
-      {/* The badge already carries its own cream plate, so it needs no extra
-          treatment on the navy header. */}
-      <LogoMark className="h-7 w-auto shrink-0 sm:h-9" />
-
-      {!markOnly && (
-        <span className="inline-flex flex-col items-center leading-none">
-          <span
-            className="font-display text-[1.35rem] tracking-[-0.02em] sm:text-[1.5rem]"
-            aria-hidden="true"
-          >
-            <span className={onDark ? 'text-orange-bright' : 'text-orange'}>MAX</span>
-            <span className={onDark ? 'text-on-inverse' : 'text-ink'}>BORDER</span>
-          </span>
-
-          {showTagline && (
-            <span
-              className={cn(
-                'mt-[0.3em] font-heading text-[0.5rem] font-700 uppercase tracking-[0.42em] sm:text-[0.55rem]',
-                // Letter-spacing applies after the final letter too, so the box
-                // is a tracking unit wider than the glyphs; the negative margin
-                // removes that phantom width so the word centres true.
-                '-mr-[0.42em]',
-                onDark ? 'text-on-inverse/60' : 'text-muted'
-              )}
-              aria-hidden="true"
-            >
-              Pest Control
-            </span>
-          )}
-        </span>
-      )}
-
-      <span className="sr-only-focusable">Maxborder Pest Control</span>
-    </span>
-  );
+type Props = {
+  /**
+   * `light` — the logo sits on a surface that is dark in both themes (the navy
+   * header and footer), so it always uses the cream-lettered artwork.
+   * `default` — it sits on the page ground, which flips with the theme, so both
+   * versions are rendered and CSS shows the one that matches the ground.
+   */
+  variant?: 'default' | 'light';
+  /**
+   * Size by height; width follows the artwork's aspect ratio. Pass a height
+   * utility only — never a display utility, which would fight `inline-flex`.
+   */
+  className?: string;
 };
+
+const art = (src: string, extra?: string) => (
+  <img
+    src={src}
+    alt=""
+    width={LOCKUP.width}
+    height={LOCKUP.height}
+    draggable={false}
+    className={cn('h-full w-auto', extra)}
+  />
+);
+
+export const Logo = ({ variant = 'default', className }: Props) => (
+  // One accessible name for the whole lockup, whichever twin is showing.
+  <span
+    role="img"
+    aria-label="Maxborder Pest Control"
+    className={cn('inline-flex shrink-0 items-center', className ?? 'h-10')}
+  >
+    {variant === 'light' ? (
+      art(LOCKUP.onDark)
+    ) : (
+      <>
+        {art(LOCKUP.onLight, 'logo-on-light-ground')}
+        {art(LOCKUP.onDark, 'logo-on-dark-ground')}
+      </>
+    )}
+  </span>
+);
