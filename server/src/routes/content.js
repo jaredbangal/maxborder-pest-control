@@ -13,6 +13,13 @@ const cache = (req, res, next) => {
 
 contentRouter.use(cache);
 
+const site = () => ({
+  company: content.company,
+  serviceArea: content.serviceArea,
+  trustPoints: content.trustPoints,
+  notes: content.notes,
+});
+
 /**
  * Everything the SPA needs to boot, in one round trip. The client used to make
  * seven parallel calls per page load, which burned rate-limit budget (whole
@@ -24,33 +31,15 @@ contentRouter.get('/bootstrap', (_req, res) => {
     data: {
       // True when submissions are not durably stored (preview/demo deploys).
       demo: !store.persistent,
-      site: {
-        company: content.company,
-        stats: content.stats,
-        certifications: content.certifications,
-        serviceAreas: content.serviceAreas,
-      },
+      site: site(),
       services: content.services,
-      plans: content.plans,
-      pestCategories: content.pestCategories,
-      pests: content.pests,
-      testimonials: content.testimonials,
-      faqs: content.faqs,
-      process: { steps: content.processSteps },
+      promotions: content.promotions.filter((p) => p.active),
     },
   });
 });
 
 contentRouter.get('/site', (_req, res) => {
-  res.json({
-    ok: true,
-    data: {
-      company: content.company,
-      stats: content.stats,
-      certifications: content.certifications,
-      serviceAreas: content.serviceAreas,
-    },
-  });
+  res.json({ ok: true, data: site() });
 });
 
 contentRouter.get('/services', (_req, res) => {
@@ -60,38 +49,6 @@ contentRouter.get('/services', (_req, res) => {
 contentRouter.get('/services/:slug', (req, res, next) => {
   const service = content.services.find((s) => s.slug === req.params.slug);
   if (!service) return next(notFound(`No service named "${req.params.slug}".`));
-  const related = content.services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const related = content.services.filter((s) => s.slug !== service.slug);
   res.json({ ok: true, data: { ...service, related } });
-});
-
-contentRouter.get('/plans', (_req, res) => res.json({ ok: true, data: content.plans }));
-contentRouter.get('/pests', (_req, res) => res.json({ ok: true, data: content.pests }));
-contentRouter.get('/pest-categories', (_req, res) =>
-  res.json({ ok: true, data: content.pestCategories })
-);
-contentRouter.get('/testimonials', (_req, res) => res.json({ ok: true, data: content.testimonials }));
-contentRouter.get('/faqs', (_req, res) => res.json({ ok: true, data: content.faqs }));
-contentRouter.get('/process', (_req, res) =>
-  res.json({ ok: true, data: { steps: content.processSteps } })
-);
-
-/** Coverage lookup for the hero ZIP field. */
-contentRouter.get('/coverage/:zip', (req, res) => {
-  const zip = String(req.params.zip).trim();
-  if (!/^\d{5}$/.test(zip)) {
-    return res.status(400).json({ ok: false, error: 'Enter a 5-digit ZIP code.' });
-  }
-  // Demo rule: Utah ZIPs (84000–84799) are in-network.
-  const n = Number(zip);
-  const covered = n >= 84000 && n <= 84799;
-  res.json({
-    ok: true,
-    data: {
-      zip,
-      covered,
-      message: covered
-        ? 'Good news — we service your area with same-week scheduling.'
-        : 'We are not in your area yet, but leave your details and we will tell you the moment we are.',
-    },
-  });
 });

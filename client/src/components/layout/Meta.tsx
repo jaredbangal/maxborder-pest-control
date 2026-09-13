@@ -6,7 +6,7 @@ import { useEffect } from 'react';
  */
 export const Meta = ({ title, description }: { title: string; description?: string }) => {
   useEffect(() => {
-    document.title = `${title} | Maxborder Pest Control`;
+    document.title = `${title} | MaxBorder Pest Control`;
 
     if (!description) return;
     const tag = document.querySelector('meta[name="description"]');

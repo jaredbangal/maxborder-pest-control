@@ -1,118 +1,87 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Mail, Phone, Youtube } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { Logo } from '@/components/ui/Logo';
 import { Container } from '@/components/ui/Section';
+import { useSite } from '@/lib/SiteContext';
 import { EMAIL, PHONE, PHONE_HREF } from '@/lib/constants';
 
-const SERVICE_LINKS = [
-  { to: '/services/general-pest-control', label: 'General Pest Control' },
-  { to: '/services/rodent-control', label: 'Rodent Control' },
-  { to: '/services/mosquito-tick-flea', label: 'Mosquito & Tick' },
-  { to: '/services/bed-bug-treatment', label: 'Bed Bug Treatment' },
-  { to: '/services/commercial-pest-control', label: 'Commercial' },
+const LINKS = [
+  { to: '/services', label: 'Services' },
+  { to: '/about', label: 'About' },
+  { to: '/contact', label: 'Contact' },
+  { to: '/privacy', label: 'Privacy Policy' },
 ];
 
-const COMPANY_LINKS = [
-  { to: '/residential', label: 'Residential' },
-  { to: '/commercial', label: 'Commercial' },
-  { to: '/service-areas', label: 'Service Areas' },
-  { to: '/about', label: 'About Us' },
-  { to: '/pests', label: 'Pest Library' },
-  { to: '/faqs', label: 'FAQs' },
-];
+export const Footer = ({ demo }: { demo?: boolean }) => {
+  const { site, services } = useSite();
+  const { company, serviceArea } = site;
 
-const SOCIALS = [
-  { href: 'https://facebook.com', label: 'Facebook', Icon: Facebook },
-  { href: 'https://instagram.com', label: 'Instagram', Icon: Instagram },
-  { href: 'https://youtube.com', label: 'YouTube', Icon: Youtube },
-  { href: 'https://linkedin.com', label: 'LinkedIn', Icon: Linkedin },
-];
+  return (
+    <footer className="relative bg-inverse text-on-inverse">
+      <Container className="py-16 lg:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16">
+          <div>
+            <Logo variant="light" className="h-12" />
 
-export const Footer = ({ demo }: { demo?: boolean }) => (
-  <footer className="relative bg-inverse text-on-inverse">
-    <Container className="py-16 lg:py-20">
-      <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16">
-        <div>
-          <Logo variant="light" className="h-12" />
+            <p className="mt-6 font-heading text-[1rem] font-700 text-on-inverse">
+              {company.legalName}
+            </p>
+            <p className="mt-2 flex items-center gap-2 text-[0.95rem] text-on-inverse/60">
+              <MapPin className="size-4 shrink-0 text-orange-bright" aria-hidden="true" />
+              {serviceArea.label}, {serviceArea.state}
+            </p>
+            {company.licenseNumber && (
+              <p className="mt-2 text-[0.85rem] text-on-inverse/60">License #{company.licenseNumber}</p>
+            )}
 
-          <p className="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-on-inverse/60">
-            Licensed, guaranteed pest control for homes and businesses. A treated perimeter,
-            maintained on schedule, backed by free return visits.
-          </p>
-
-          <ul className="mt-8 space-y-3 text-[0.92rem]">
-            <li>
-              <a
-                href={PHONE_HREF}
-                className="inline-flex min-h-[2.75rem] items-center gap-3 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:text-orange-bright sm:min-h-0"
-              >
-                <Phone className="size-4 shrink-0 text-orange-bright" aria-hidden="true" />
-                {PHONE}
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${EMAIL}`}
-                className="inline-flex min-h-[2.75rem] items-center gap-3 text-on-inverse/70 transition-colors duration-[var(--dur-fast)] hover:text-on-inverse sm:min-h-0"
-              >
-                <Mail className="size-4 shrink-0 text-orange-bright" aria-hidden="true" />
-                {EMAIL}
-              </a>
-            </li>
-          </ul>
-
-          <ul className="mt-8 flex gap-2">
-            {SOCIALS.map(({ href, label, Icon }) => (
-              <li key={label}>
+            <ul className="mt-8 space-y-3 text-[0.92rem]">
+              <li>
                 <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${label} (opens in a new tab)`}
-                  className="grid size-11 place-items-center rounded-full border-2 border-on-inverse/15 text-on-inverse/70 transition-[background-color,border-color,color] duration-[var(--dur-fast)] hover:border-orange-bright hover:bg-orange-bright hover:text-ink"
+                  href={PHONE_HREF}
+                  className="inline-flex min-h-[2.75rem] items-center gap-3 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:text-orange-bright sm:min-h-0"
                 >
-                  <Icon className="size-4" aria-hidden="true" />
+                  <Phone className="size-4 shrink-0 text-orange-bright" aria-hidden="true" />
+                  {PHONE}
                 </a>
               </li>
-            ))}
-          </ul>
+              <li>
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="inline-flex min-h-[2.75rem] items-center gap-3 text-on-inverse/70 transition-colors duration-[var(--dur-fast)] hover:text-on-inverse sm:min-h-0"
+                >
+                  <Mail className="size-4 shrink-0 text-orange-bright" aria-hidden="true" />
+                  {EMAIL}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <FooterColumn
+            title="Services"
+            links={services.map((s) => ({ to: `/services/${s.slug}`, label: s.name }))}
+          />
+          <FooterColumn title="Links" links={LINKS} />
         </div>
-
-        <FooterColumn title="Services" links={SERVICE_LINKS} />
-        <FooterColumn title="Company" links={COMPANY_LINKS} />
-      </div>
-
-    </Container>
-
-    <div className="border-t border-on-inverse/12">
-      <Container className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-[0.8rem] text-on-inverse/60">
-          © {new Date().getFullYear()} Maxborder Pest Control.
-          {demo && (
-            <>
-              {' '}
-              <span className="text-orange-bright">
-                Demo site — form submissions are not stored or acted on.
-              </span>
-            </>
-          )}
-        </p>
-        <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[0.8rem]">
-          {['Privacy Policy', 'Terms of Use', 'Accessibility', 'Sitemap'].map((label) => (
-            <li key={label}>
-              <Link
-                to="/"
-                className="flex min-h-[2.75rem] items-center text-on-inverse/60 transition-colors duration-[var(--dur-fast)] hover:text-on-inverse sm:min-h-0"
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
       </Container>
-    </div>
-  </footer>
-);
+
+      <div className="border-t border-on-inverse/12">
+        <Container className="py-6">
+          <p className="text-[0.8rem] text-on-inverse/60">
+            © {new Date().getFullYear()} {company.legalName}.
+            {demo && (
+              <>
+                {' '}
+                <span className="text-orange-bright">
+                  Demo site — form submissions are not stored or acted on.
+                </span>
+              </>
+            )}
+          </p>
+        </Container>
+      </div>
+    </footer>
+  );
+};
 
 const FooterColumn = ({
   title,
@@ -138,4 +107,3 @@ const FooterColumn = ({
     </ul>
   </div>
 );
-

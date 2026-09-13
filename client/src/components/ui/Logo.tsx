@@ -42,7 +42,7 @@ export const Logo = ({ variant = 'default', className }: Props) => (
   // One accessible name for the whole lockup, whichever twin is showing.
   <span
     role="img"
-    aria-label="Maxborder Pest Control"
+    aria-label="MaxBorder Pest Control"
     className={cn('inline-flex shrink-0 items-center', className ?? 'h-10')}
   >
     {variant === 'light' ? (

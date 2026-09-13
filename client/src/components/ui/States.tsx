@@ -11,7 +11,7 @@ export const PageLoader = () => (
         <span className="animate-pulse-ring absolute inline-flex size-full rounded-full bg-orange" />
         <span className="relative inline-flex size-3 rounded-full bg-orange" />
       </span>
-      <span className="sr-only-focusable">Loading Maxborder Pest Control</span>
+      <span className="sr-only-focusable">Loading MaxBorder Pest Control</span>
     </div>
   </div>
 );

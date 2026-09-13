@@ -39,7 +39,10 @@ const optional = (schema) =>
 const zip = clean(12).pipe(
   z.string().regex(/^[A-Za-z0-9\s-]{3,12}$/, 'Enter a valid ZIP or postcode.')
 );
-const slug = clean(60).pipe(z.string().regex(/^[a-z0-9-]+$/, 'Invalid selection.'));
+const filled = (max, message) => clean(max).pipe(z.string().min(2, message));
+
+// The three services plus "Not sure / help me choose".
+const SERVICE_CHOICES = ['general-pest-control', 'rodent-control', 'mosquito-control', 'not-sure'];
 
 /**
  * Bots fill every field they find. `company` is hidden from real users via CSS,
@@ -57,11 +60,14 @@ const base = {
 
 export const quoteSchema = z.object({
   ...base,
-  zip,
-  address: optional(clean(200)),
-  serviceSlug: optional(slug),
+  address: clean(200).pipe(z.string().min(5, 'Please enter the service address.')),
+  serviceSlug: z.enum(SERVICE_CHOICES, { message: 'Choose a service, or "Not sure".' }),
+  problem: filled(200, 'Tell us what pest or problem you are seeing.'),
+  activityLocation: filled(200, 'Tell us where you are seeing activity.'),
+  preferredTime: filled(120, 'Let us know a preferred appointment time.'),
   propertyType: optional(z.enum(['home', 'apartment', 'business', 'other'])),
-  urgency: optional(z.enum(['emergency', 'this-week', 'flexible'])),
+  petsChildren: optional(clean(200)),
+  accessNotes: optional(clean(300)),
   message: optional(clean(2000)),
 });
 

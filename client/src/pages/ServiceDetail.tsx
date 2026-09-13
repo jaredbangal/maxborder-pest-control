@@ -7,45 +7,48 @@ import { Icon } from '@/components/ui/Icon';
 import { Reveal } from '@/components/ui/Reveal';
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { ServiceCard } from '@/components/sections/ServicesSection';
+import { ServiceNotes } from '@/components/sections/ServiceNotes';
 import { QuoteForm } from '@/components/sections/QuoteForm';
-import { FaqSection } from '@/components/sections/FaqSection';
 import { useSite } from '@/lib/SiteContext';
 import { PHONE, PHONE_HREF } from '@/lib/constants';
 
 export const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { services, faqs } = useSite();
+  const { services } = useSite();
 
   const service = services.find((s) => s.slug === slug);
 
   // Unknown slug is a genuine 404, not an empty page.
   if (!service) return <Navigate to="/404" replace />;
 
-  const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const related = services.filter((s) => s.slug !== service.slug);
 
   return (
     <>
-      <Meta title={service.name} description={service.summary} />
+      <Meta title={service.name} description={service.lead} />
 
       <PageHero
-        eyebrow="Service"
+        eyebrow={service.seasonal ? 'Seasonal treatment' : 'Service'}
         crumbs={[
           { to: '/services', label: 'Services' },
           { to: `/services/${service.slug}`, label: service.name },
         ]}
         title={service.name}
-        intro={service.summary}
+        intro={service.lead}
       >
+        {service.price && (
+          <p className="mb-6 font-heading text-[1.3rem] font-800 text-ink">{service.price}</p>
+        )}
+
         <div className="flex flex-wrap items-center gap-4">
-          <Button to="/contact" size="lg">
-            Get a free quote
+          <Button to={`/contact?service=${service.slug}`} size="lg">
+            Get a Quote
           </Button>
 
           <Button href={PHONE_HREF} variant="outline" size="lg">
             <Phone className="size-4" aria-hidden="true" />
             {PHONE}
           </Button>
-
         </div>
       </PageHero>
 
@@ -59,16 +62,12 @@ export const ServiceDetail = () => {
             </Reveal>
 
             <Reveal delay={80}>
-              <p className="mt-7 text-[1.1rem] leading-relaxed text-ink">{service.description}</p>
-            </Reveal>
-
-            <Reveal delay={140}>
-              <h2 className="mt-12 font-heading text-[1.4rem] font-800">What is included</h2>
+              <h2 className="mt-10 font-heading text-[1.4rem] font-800">{service.includesTitle}</h2>
             </Reveal>
 
             <ul className="mt-6 space-y-4">
-              {service.highlights.map((item, i) => (
-                <Reveal as="li" key={item} delay={180 + i * 60}>
+              {service.includes.map((item, i) => (
+                <Reveal as="li" key={item} delay={120 + i * 60}>
                   <span className="flex items-start gap-3">
                     <Check
                       className="mt-1 size-4 shrink-0 text-orange"
@@ -81,21 +80,37 @@ export const ServiceDetail = () => {
               ))}
             </ul>
 
-            <Reveal delay={220}>
-              <h2 className="mt-12 font-heading text-[1.4rem] font-800">Pests covered</h2>
-            </Reveal>
+            {service.pests && (
+              <>
+                <Reveal delay={220}>
+                  <h2 className="mt-12 font-heading text-[1.4rem] font-800">{service.pestsTitle}</h2>
+                </Reveal>
 
-            <Reveal delay={260}>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {service.covers.map((pest) => (
-                  <li
-                    key={pest}
-                    className="border-2 border-ink/12 bg-paper px-4 py-2 font-heading text-[0.78rem] font-700 uppercase tracking-[0.08em]"
-                  >
-                    {pest}
-                  </li>
-                ))}
-              </ul>
+                <Reveal delay={260}>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {service.pests.map((pest) => (
+                      <li
+                        key={pest}
+                        className="border-2 border-ink/12 bg-paper px-4 py-2 font-heading text-[0.78rem] font-700 uppercase tracking-[0.08em]"
+                      >
+                        {pest}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              </>
+            )}
+
+            {service.note && (
+              <Reveal delay={260}>
+                <p className="mt-10 border-l-4 border-orange pl-5 text-[1rem] leading-relaxed text-ink">
+                  {service.note}
+                </p>
+              </Reveal>
+            )}
+
+            <Reveal delay={300}>
+              <ServiceNotes className="mt-12" />
             </Reveal>
           </div>
 
@@ -109,9 +124,9 @@ export const ServiceDetail = () => {
       </Section>
 
       <Section tone="paper">
-        <SectionHeader eyebrow="Also consider" title="Other services" />
+        <SectionHeader eyebrow="Also available" title="Other services" />
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2">
           {related.map((item, i) => (
             <Reveal as="li" key={item.slug} delay={i * 70}>
               <ServiceCard service={item} />
@@ -119,8 +134,6 @@ export const ServiceDetail = () => {
           ))}
         </ul>
       </Section>
-
-      <FaqSection faqs={faqs} limit={4} />
     </>
   );
 };

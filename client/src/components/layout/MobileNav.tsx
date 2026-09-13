@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn';
 import { useLockBodyScroll } from '@/hooks';
 import { Button } from '@/components/ui/Button';
 import { Logo } from '@/components/ui/Logo';
-import { NAV_LINKS, PHONE, PHONE_HREF, UTILITY_LINKS } from '@/lib/constants';
+import { NAV_LINKS, PHONE, PHONE_HREF } from '@/lib/constants';
 
 /**
  * Full-screen mobile drawer with a proper focus trap: focus moves in on open,
@@ -60,7 +60,8 @@ export const MobileNav = ({ open, onClose }: { open: boolean; onClose: () => voi
   return (
     <div
       className={cn(
-        'fixed inset-0 lg:hidden',
+        // Matches the menu button, which shows until the desktop nav does (xl).
+        'fixed inset-0 xl:hidden',
         open ? 'pointer-events-auto' : 'pointer-events-none'
       )}
       style={{ zIndex: 'var(--z-drawer)' }}
@@ -107,6 +108,7 @@ export const MobileNav = ({ open, onClose }: { open: boolean; onClose: () => voi
               <li key={link.to}>
                 <NavLink
                   to={link.to}
+                  end={link.to === '/'}
                   onClick={onClose}
                   className={({ isActive }) =>
                     cn(
@@ -127,31 +129,12 @@ export const MobileNav = ({ open, onClose }: { open: boolean; onClose: () => voi
               </li>
             ))}
           </ul>
-
-          <ul className="mt-6 space-y-1 border-t border-ink/10 pt-5">
-            {UTILITY_LINKS.map((link) => (
-              <li key={link.to}>
-                <NavLink
-                  to={link.to}
-                  onClick={onClose}
-                  className={({ isActive }) =>
-                    cn(
-                      'flex min-h-[2.75rem] items-center text-[0.95rem]',
-                      'transition-colors duration-[var(--dur-fast)]',
-                      isActive ? 'text-orange' : 'text-muted hover:text-ink'
-                    )
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
         </nav>
 
-        <div className="space-y-3 border-t border-ink/12 px-6 py-5">
-          <Button to="/contact" size="lg" className="w-full" >
-            Get a free quote
+        {/* Clicks bubble up from either link, so the drawer closes on the way out. */}
+        <div className="space-y-3 border-t border-ink/12 px-6 py-5" onClick={onClose}>
+          <Button to="/contact" size="lg" className="w-full">
+            Get a Quote
           </Button>
           <a
             href={PHONE_HREF}

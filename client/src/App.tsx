@@ -7,18 +7,30 @@ import { PageError, PageLoader } from '@/components/ui/States';
 import { SiteProvider, useSite } from '@/lib/SiteContext';
 import { Home } from '@/pages/Home';
 import { Services } from '@/pages/Services';
-import { Residential } from '@/pages/Residential';
-import { Commercial } from '@/pages/Commercial';
-import { ServiceAreas } from '@/pages/ServiceAreas';
 import { ServiceDetail } from '@/pages/ServiceDetail';
-import { Plans } from '@/pages/Plans';
-import { Pests } from '@/pages/Pests';
 import { About } from '@/pages/About';
 import { Contact } from '@/pages/Contact';
-import { Faqs } from '@/pages/Faqs';
-import { Coverage } from '@/pages/Coverage';
-import { HowItWorks } from '@/pages/HowItWorks';
+import { Privacy } from '@/pages/Privacy';
 import { NotFound } from '@/pages/NotFound';
+
+/**
+ * Pages retired when the site narrowed to three services. Each one points at
+ * its nearest replacement so old links and search results don't 404.
+ */
+const RETIRED: Array<[string, string]> = [
+  ['/residential', '/services'],
+  ['/commercial', '/services'],
+  ['/plans', '/services'],
+  ['/pests', '/services'],
+  ['/coverage', '/services'],
+  ['/how-it-works', '/services'],
+  ['/service-areas', '/'],
+  ['/faqs', '/contact'],
+  ['/faq', '/contact'],
+  ['/services/mosquito-tick-flea', '/services/mosquito-control'],
+  ['/services/bed-bug-treatment', '/services'],
+  ['/services/commercial-pest-control', '/services'],
+];
 
 const Shell = () => {
   const { demo } = useSite();
@@ -32,20 +44,14 @@ const Shell = () => {
       <main id="main" className="pb-20 sm:pb-0">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/residential" element={<Residential />} />
-          <Route path="/commercial" element={<Commercial />} />
-          <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
-          <Route path="/plans" element={<Plans />} />
-          <Route path="/pests" element={<Pests />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/coverage" element={<Coverage />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/faqs" element={<Faqs />} />
-          {/* Old FAQ URL kept alive so existing links do not 404. */}
-          <Route path="/faq" element={<Navigate to="/faqs" replace />} />
+          <Route path="/privacy" element={<Privacy />} />
+          {RETIRED.map(([from, to]) => (
+            <Route key={from} path={from} element={<Navigate to={to} replace />} />
+          ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Menu, Phone, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { useScrollHeader } from '@/hooks';
@@ -8,13 +8,11 @@ import { Logo } from '@/components/ui/Logo';
 import { ThemeToggle } from './ThemeToggle';
 import { AnnouncementBar } from './AnnouncementBar';
 import { MobileNav } from './MobileNav';
-import { NavDropdown } from './NavDropdown';
-import { NAV_LINKS, PHONE, PHONE_HREF, UTILITY_LINKS } from '@/lib/constants';
+import { NAV_LINKS, PHONE, PHONE_HREF } from '@/lib/constants';
 
 export const Header = () => {
   const { scrolled } = useScrollHeader();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { pathname } = useLocation();
 
   return (
     <>
@@ -42,7 +40,7 @@ export const Header = () => {
       >
         {!scrolled && <AnnouncementBar />}
 
-        {/* Utility row — secondary links and the phone number. */}
+        {/* Utility row — the trust line and the phone number. */}
         <div className="hidden border-b border-on-inverse/12 lg:block">
           <div
             className={cn(
@@ -52,38 +50,16 @@ export const Header = () => {
           >
             <p className="flex items-center gap-2 text-[0.76rem] text-on-inverse/70">
               <ShieldCheck className="size-3.5 text-orange-bright" aria-hidden="true" />
-              Licensed &amp; insured · Free return visits · Service within 48 hours
+              Licensed Utah Pest Control Business · Insured · Serving Davis &amp; Salt Lake Counties
             </p>
 
-            <div className="flex items-center gap-5">
-              <a
-                href={PHONE_HREF}
-                className="hidden items-center gap-2 font-heading text-[0.8rem] font-700 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:text-orange-bright xl:flex"
-              >
-                <Phone className="size-3.5 text-orange-bright" aria-hidden="true" />
-                {PHONE}
-              </a>
-
-              <nav aria-label="Secondary">
-                <ul className="flex items-center gap-5">
-                  {UTILITY_LINKS.map((link) => (
-                    <li key={link.to}>
-                      <NavLink
-                        to={link.to}
-                        className={({ isActive }) =>
-                          cn(
-                            'text-[0.76rem] transition-colors duration-[var(--dur-fast)]',
-                            isActive ? 'text-on-inverse' : 'text-on-inverse/70 hover:text-on-inverse'
-                          )
-                        }
-                      >
-                        {link.label}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
+            <a
+              href={PHONE_HREF}
+              className="flex items-center gap-2 font-heading text-[0.8rem] font-700 text-on-inverse transition-colors duration-[var(--dur-fast)] hover:text-orange-bright"
+            >
+              <Phone className="size-3.5 text-orange-bright" aria-hidden="true" />
+              {PHONE}
+            </a>
           </div>
         </div>
 
@@ -104,7 +80,7 @@ export const Header = () => {
           <div className="flex flex-1 justify-start">
             <Link
               to="/"
-              aria-label="Maxborder Pest Control — home"
+              aria-label="MaxBorder Pest Control — home"
               className="flex min-h-[2.75rem] items-center"
             >
               <Logo variant="light" className="h-8 sm:h-10 lg:h-12" />
@@ -114,14 +90,24 @@ export const Header = () => {
           <nav className="hidden flex-none xl:block" aria-label="Primary">
             <ul className="flex items-center gap-1 rounded-full border border-on-inverse/15 bg-on-inverse/6 p-1">
               {NAV_LINKS.map((link) => (
-                <NavDropdown
-                  key={link.to}
-                  to={link.to}
-                  label={link.label}
-                  blurb={link.blurb}
-                  items={link.items}
-                  active={pathname.startsWith(link.to)}
-                />
+                <li key={link.to}>
+                  <NavLink
+                    to={link.to}
+                    end={link.to === '/'}
+                    className={({ isActive }) =>
+                      cn(
+                        'flex min-h-[2.75rem] items-center whitespace-nowrap rounded-full px-5',
+                        'font-heading text-[0.78rem] font-700 uppercase tracking-[0.1em]',
+                        'transition-[background-color,color] duration-[var(--dur-base)]',
+                        isActive
+                          ? 'bg-on-inverse text-inverse'
+                          : 'text-on-inverse/75 hover:bg-on-inverse/10 hover:text-on-inverse'
+                      )
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                </li>
               ))}
             </ul>
           </nav>
@@ -129,7 +115,7 @@ export const Header = () => {
           <div className="flex flex-1 items-center justify-end gap-3">
             <span className="hidden sm:block">
               <Button to="/contact" size="sm">
-                Free Quote
+                Get a Quote
               </Button>
             </span>
 

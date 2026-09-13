@@ -12,16 +12,26 @@ type Tone = 'light' | 'dark';
 
 const EMPTY = {
   name: '',
-  email: '',
   phone: '',
-  zip: '',
+  email: '',
+  address: '',
   serviceSlug: '',
+  problem: '',
+  activityLocation: '',
+  preferredTime: '',
   propertyType: '',
-  urgency: '',
+  petsChildren: '',
+  accessNotes: '',
   message: '',
   company: '',
 };
 
+type Key = keyof typeof EMPTY;
+
+/**
+ * Short on purpose: seven required fields, four optional. `compact` drops the
+ * optional ones for the narrow sidebar on service pages.
+ */
 export const QuoteForm = ({
   services,
   tone = 'light',
@@ -34,7 +44,8 @@ export const QuoteForm = ({
   compact?: boolean;
 }) => {
   const { pathname } = useLocation();
-  const [values, setValues] = useState({ ...EMPTY, serviceSlug: defaultService ?? '' });
+  const initial = { ...EMPTY, serviceSlug: defaultService ?? '' };
+  const [values, setValues] = useState(initial);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle');
@@ -42,11 +53,20 @@ export const QuoteForm = ({
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
 
-  const set = (key: keyof typeof EMPTY) => (v: string) => {
+  const set = (key: Key) => (v: string) => {
     setValues((prev) => ({ ...prev, [key]: v }));
     // Clear a field's error as soon as the person starts correcting it.
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: '' }));
   };
+
+  // Shared wiring for every field: value, error, and change handler.
+  const field = (key: Key) => ({
+    name: key,
+    tone,
+    value: values[key],
+    error: errors[key],
+    onChange: (e: { target: { value: string } }) => set(key)(e.target.value),
+  });
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -60,7 +80,7 @@ export const QuoteForm = ({
       const res = await api.post<LeadResponse>('/quote', { ...values, sourcePage: pathname });
       setSuccessMsg(res.message);
       setStatus('done');
-      setValues({ ...EMPTY });
+      setValues(initial);
       // Move focus to the confirmation so screen readers land on the outcome.
       requestAnimationFrame(() => successRef.current?.focus());
     } catch (err) {
@@ -129,119 +149,98 @@ export const QuoteForm = ({
         tone === 'dark' ? 'border-on-inverse/20 bg-on-inverse/5' : 'border-ink/15 bg-paper'
       )}
     >
-      <div className={cn('grid gap-5', compact ? 'sm:grid-cols-2' : 'sm:grid-cols-2')}>
-        <Input
-          label="Full name"
-          name="name"
-          required
-          autoComplete="name"
-          tone={tone}
-          value={values.name}
-          error={errors.name}
-          onChange={(e) => set('name')(e.target.value)}
-        />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Input label="Full name" required autoComplete="name" {...field('name')} />
 
         <Input
           label="Phone"
-          name="phone"
           type="tel"
           required
           autoComplete="tel"
           inputMode="tel"
           placeholder="(801) 555-0134"
-          tone={tone}
-          value={values.phone}
-          error={errors.phone}
-          onChange={(e) => set('phone')(e.target.value)}
+          {...field('phone')}
         />
 
         <Input
           label="Email"
-          name="email"
           type="email"
           required
           autoComplete="email"
           inputMode="email"
-          tone={tone}
-          value={values.email}
-          error={errors.email}
-          onChange={(e) => set('email')(e.target.value)}
+          {...field('email')}
         />
 
-        <Input
-          label="ZIP code"
-          name="zip"
-          required
-          autoComplete="postal-code"
-          inputMode="numeric"
-          maxLength={10}
-          tone={tone}
-          value={values.zip}
-          error={errors.zip}
-          onChange={(e) => set('zip')(e.target.value)}
-        />
-
-        <Select
-          label="Service needed"
-          name="serviceSlug"
-          tone={tone}
-          hint="optional"
-          value={values.serviceSlug}
-          error={errors.serviceSlug}
-          onChange={(e) => set('serviceSlug')(e.target.value)}
-        >
-          <option value="">Not sure yet — help me choose</option>
+        <Select label="Service" required {...field('serviceSlug')}>
+          <option value="">Select a service</option>
           {services.map((s) => (
             <option key={s.slug} value={s.slug}>
               {s.name}
             </option>
           ))}
+          <option value="not-sure">Not sure / help me choose</option>
         </Select>
 
-        <Select
-          label="How soon?"
-          name="urgency"
-          tone={tone}
-          hint="optional"
-          value={values.urgency}
-          error={errors.urgency}
-          onChange={(e) => set('urgency')(e.target.value)}
-        >
-          <option value="">Select a timeframe</option>
-          <option value="emergency">It is an emergency</option>
-          <option value="this-week">This week</option>
-          <option value="flexible">I am flexible</option>
-        </Select>
+        <Input
+          label="Service address"
+          required
+          autoComplete="street-address"
+          className="sm:col-span-2"
+          placeholder="Street, city, ZIP"
+          {...field('address')}
+        />
+
+        <Input
+          label="Pest or problem"
+          required
+          placeholder="Ants, mice, spiders…"
+          {...field('problem')}
+        />
+
+        <Input
+          label="Where are you seeing it?"
+          required
+          placeholder="Kitchen, garage, backyard…"
+          {...field('activityLocation')}
+        />
+
+        <Input
+          label="Preferred appointment time"
+          required
+          placeholder="Weekday mornings"
+          className={cn(compact && 'sm:col-span-2')}
+          {...field('preferredTime')}
+        />
 
         {!compact && (
           <>
-            <Select
-              label="Property type"
-              name="propertyType"
-              tone={tone}
-              hint="optional"
-              className="sm:col-span-2"
-              value={values.propertyType}
-              error={errors.propertyType}
-              onChange={(e) => set('propertyType')(e.target.value)}
-            >
+            <Select label="Property type" hint="optional" {...field('propertyType')}>
               <option value="">Select property type</option>
-              <option value="home">Single-family home</option>
+              <option value="home">House</option>
               <option value="apartment">Apartment or condo</option>
-              <option value="business">Business or commercial</option>
+              <option value="business">Small business</option>
               <option value="other">Something else</option>
             </Select>
 
+            <Input
+              label="Pets or children at home?"
+              hint="optional"
+              placeholder="Two dogs, one toddler"
+              {...field('petsChildren')}
+            />
+
+            <Input
+              label="Access instructions"
+              hint="optional"
+              placeholder="Gate code, side-yard access…"
+              {...field('accessNotes')}
+            />
+
             <Textarea
-              label="What are you seeing?"
-              name="message"
-              tone={tone}
+              label="Anything else we should know?"
               hint="optional"
               className="sm:col-span-2"
-              placeholder="Ants along the kitchen baseboard for about two weeks, worst in the mornings…"
-              value={values.message}
-              error={errors.message}
-              onChange={(e) => set('message')(e.target.value)}
+              {...field('message')}
             />
           </>
         )}
@@ -259,11 +258,10 @@ export const QuoteForm = ({
         </p>
       )}
 
-      <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
+      <div className="mt-7">
         <Button type="submit" size="lg" loading={status === 'sending'}>
-          {status === 'sending' ? 'Sending…' : 'Get my free quote'}
+          {status === 'sending' ? 'Sending…' : 'Get a Quote'}
         </Button>
-
       </div>
     </form>
   );

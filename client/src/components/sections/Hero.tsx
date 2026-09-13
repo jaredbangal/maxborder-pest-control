@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Phone, ShieldCheck, Star } from 'lucide-react';
+import { ArrowRight, BadgeCheck, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
@@ -6,9 +6,9 @@ import { PerimeterGraphic } from './PerimeterGraphic';
 import { PHONE, PHONE_HREF } from '@/lib/constants';
 
 const TRUST_POINTS = [
-  { Icon: ShieldCheck, label: 'Licensed & insured' },
-  { Icon: Star, label: '4.9 from 3,800+ reviews' },
-  { Icon: Check, label: 'Free return visits' },
+  { Icon: BadgeCheck, label: 'Licensed Utah Pest Control Business' },
+  { Icon: ShieldCheck, label: 'Insured' },
+  { Icon: MapPin, label: 'Serving Davis & Salt Lake Counties' },
 ];
 
 export const Hero = () => (
@@ -56,26 +56,30 @@ export const Hero = () => (
 
           <Reveal delay={180}>
             <p className="mt-8 max-w-xl text-[1.0625rem] leading-relaxed text-on-hero sm:text-[1.15rem]">
-              We build a treated perimeter around your home and maintain it season by season — so
-              ants, roaches, rodents and mosquitoes never make it past the foundation. Licensed
-              technicians, service within 48 hours, and free return visits for as long as you need
-              them.
+              Straightforward pest control for homes and small businesses in Davis and Salt Lake
+              Counties. We focus on practical treatments for common household pests, rodents, and
+              mosquitoes.
             </p>
           </Reveal>
 
           <Reveal delay={260}>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button to="/contact" size="lg" variant="onHero" className="group">
-                Get my free inspection
+                Get a Quote
                 <ArrowRight
                   className="size-4 transition-transform duration-[var(--dur-base)] group-hover:translate-x-1"
                   aria-hidden="true"
                 />
               </Button>
 
-              <Button href={PHONE_HREF} variant="onHeroOutline" size="lg">
+              <Button
+                href={PHONE_HREF}
+                variant="onHeroOutline"
+                size="lg"
+                aria-label={`Call now: ${PHONE}`}
+              >
                 <Phone className="size-4" aria-hidden="true" />
-                {PHONE}
+                Call Now
               </Button>
             </div>
           </Reveal>

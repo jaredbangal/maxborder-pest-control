@@ -1,21 +1,26 @@
-import { Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { Meta } from '@/components/layout/Meta';
 import { PageHero } from '@/components/layout/PageHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { Section } from '@/components/ui/Section';
 import { QuoteForm } from '@/components/sections/QuoteForm';
-import { FaqSection } from '@/components/sections/FaqSection';
 import { useSite } from '@/lib/SiteContext';
 import { EMAIL, PHONE, PHONE_HREF } from '@/lib/constants';
 
 export const Contact = () => {
-  const { services, site, faqs } = useSite();
+  const { services, site } = useSite();
+
+  // Promotion and service-page buttons link here with ?service=<slug>.
+  const [params] = useSearchParams();
+  const requested = params.get('service');
+  const preset = services.some((s) => s.slug === requested) ? requested! : undefined;
 
   return (
     <>
       <Meta
-        title="Contact & Free Quote"
-        description="Request a free pest inspection. We reply within one business hour, and service is scheduled within 48 hours."
+        title="Get a Quote"
+        description="Request a quote for general pest control, rodent control or mosquito control in Davis and Salt Lake Counties."
       />
 
       <PageHero
@@ -28,13 +33,14 @@ export const Contact = () => {
             are seeing.
           </>
         }
-        intro="Free inspection, honest assessment, and a written plan before you pay anything. Most requests get a call back within the hour."
+        intro="Fill out the short form or call us directly. We will follow up to talk through what is going on and a practical treatment."
       />
 
       <Section tone="cream" className="!pt-4">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
           <Reveal>
-            <QuoteForm services={services} />
+            {/* Keyed so arriving from a different promotion resets the choice. */}
+            <QuoteForm key={preset ?? 'none'} services={services} defaultService={preset} />
           </Reveal>
 
           <Reveal delay={120}>
@@ -50,9 +56,7 @@ export const Contact = () => {
                       </span>
                       <span>
                         <span className="block font-heading text-[1.05rem] font-800">{PHONE}</span>
-                        <span className="block text-[0.85rem] text-muted">
-                          Fastest route to a technician
-                        </span>
+                        <span className="block text-[0.85rem] text-muted">Call now</span>
                       </span>
                     </a>
                   </li>
@@ -64,9 +68,7 @@ export const Contact = () => {
                       </span>
                       <span>
                         <span className="block font-heading text-[1.05rem] font-800">{EMAIL}</span>
-                        <span className="block text-[0.85rem] text-muted">
-                          Send photos for a free pest ID
-                        </span>
+                        <span className="block text-[0.85rem] text-muted">Email us</span>
                       </span>
                     </a>
                   </li>
@@ -77,52 +79,17 @@ export const Contact = () => {
                     </span>
                     <span>
                       <span className="block font-heading text-[1.05rem] font-800">
-                        {site.company.address.street}
+                        {site.serviceArea.label}
                       </span>
-                      <span className="block text-[0.85rem] text-muted">
-                        {site.company.address.city}, {site.company.address.state}{' '}
-                        {site.company.address.zip}
-                      </span>
+                      <span className="block text-[0.85rem] text-muted">{site.serviceArea.state}</span>
                     </span>
                   </li>
-                </ul>
-              </div>
-
-              <div className="corner-ticks border-2 border-ink/12 bg-paper p-7">
-                <h2 className="eyebrow flex items-center gap-2">
-                  <Clock className="size-3.5 text-orange" aria-hidden="true" />
-                  Opening hours
-                </h2>
-
-                <dl className="mt-5 space-y-3">
-                  {site.company.hours.map((slot) => (
-                    <div key={slot.days} className="flex justify-between gap-4 text-[0.9rem]">
-                      <dt className="font-600 text-ink">{slot.days}</dt>
-                      <dd className="text-right text-muted">{slot.open}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-
-              <div>
-                <h2 className="eyebrow">Where we service</h2>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {site.serviceAreas.map((area) => (
-                    <li
-                      key={area.region}
-                      className="border-2 border-ink/12 px-3.5 py-1.5 font-heading text-[0.72rem] font-700 uppercase tracking-[0.1em] text-muted"
-                    >
-                      {area.region}
-                    </li>
-                  ))}
                 </ul>
               </div>
             </div>
           </Reveal>
         </div>
       </Section>
-
-      <FaqSection faqs={faqs} limit={5} />
     </>
   );
 };

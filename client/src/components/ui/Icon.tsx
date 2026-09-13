@@ -1,12 +1,12 @@
 import {
-  Bed,
+  BadgeCheck,
   Bug,
-  Building2,
   Droplets,
-  Home,
+  FileText,
+  MapPin,
   Mouse,
   Shield,
-  Zap,
+  Tag,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -18,11 +18,11 @@ const registry: Record<string, LucideIcon> = {
   shield: Shield,
   mouse: Mouse,
   droplet: Droplets,
-  home: Home,
-  bed: Bed,
-  building: Building2,
   bug: Bug,
-  zap: Zap,
+  badge: BadgeCheck,
+  tag: Tag,
+  file: FileText,
+  map: MapPin,
 };
 
 export const Icon = ({

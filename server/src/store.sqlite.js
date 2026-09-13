@@ -45,19 +45,29 @@ export const createSqliteStore = (file) => {
     );
   `);
 
+  // Quote-form fields added after the first release. CREATE TABLE IF NOT EXISTS
+  // leaves an existing table alone, so add whichever columns it is missing.
+  const existing = new Set(db.prepare('PRAGMA table_info(leads)').all().map((c) => c.name));
+  for (const column of ['problem', 'activity_location', 'preferred_time', 'pets_children', 'access_notes']) {
+    if (!existing.has(column)) db.exec(`ALTER TABLE leads ADD COLUMN ${column} TEXT`);
+  }
+
   const statements = {
     insertLead: db.prepare(`
       INSERT INTO leads (
         id, kind, name, email, phone, zip, address, service_slug, property_type,
-        urgency, message, source_page, ip_hash, user_agent, created_at
+        urgency, problem, activity_location, preferred_time, pets_children, access_notes,
+        message, source_page, ip_hash, user_agent, created_at
       ) VALUES (
         :id, :kind, :name, :email, :phone, :zip, :address, :service_slug, :property_type,
-        :urgency, :message, :source_page, :ip_hash, :user_agent, :created_at
+        :urgency, :problem, :activity_location, :preferred_time, :pets_children, :access_notes,
+        :message, :source_page, :ip_hash, :user_agent, :created_at
       )
     `),
     listLeads: db.prepare(`
       SELECT id, kind, name, email, phone, zip, address, service_slug, property_type,
-             urgency, message, source_page, status, created_at
+             urgency, problem, activity_location, preferred_time, pets_children, access_notes,
+             message, source_page, status, created_at
       FROM leads
       ORDER BY created_at DESC
       LIMIT :limit OFFSET :offset

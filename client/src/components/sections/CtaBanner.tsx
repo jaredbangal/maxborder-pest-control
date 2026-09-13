@@ -22,7 +22,7 @@ export const CtaBanner = ({ services }: { services: Service[] }) => (
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
           <Reveal>
-            <p className="eyebrow text-on-inverse/60">Get started</p>
+            <p className="eyebrow text-on-inverse/60">Get a quote</p>
           </Reveal>
 
           <Reveal delay={80}>
@@ -35,8 +35,8 @@ export const CtaBanner = ({ services }: { services: Service[] }) => (
 
           <Reveal delay={160}>
             <p className="mt-6 max-w-md text-[1.05rem] leading-relaxed text-on-inverse/65">
-              Free inspection, honest assessment, and a written plan before you pay anything. If we
-              are not the right fit, we will tell you that too.
+              Tell us what you are seeing and where. We will follow up to talk through a practical
+              treatment and a straightforward price.
             </p>
           </Reveal>
 
@@ -46,21 +46,7 @@ export const CtaBanner = ({ services }: { services: Service[] }) => (
                 <Phone className="size-4" aria-hidden="true" />
                 {PHONE}
               </Button>
-
             </div>
-          </Reveal>
-
-          <Reveal delay={320}>
-            <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-on-inverse/12 pt-8">
-              <div>
-                <dt className="eyebrow text-on-inverse/60">Response time</dt>
-                <dd className="mt-2 font-display text-[2rem] leading-none text-on-inverse tabular">24hr</dd>
-              </div>
-              <div>
-                <dt className="eyebrow text-on-inverse/60">Re-service cost</dt>
-                <dd className="mt-2 font-display text-[2rem] leading-none text-on-inverse">Free</dd>
-              </div>
-            </dl>
           </Reveal>
         </div>
 

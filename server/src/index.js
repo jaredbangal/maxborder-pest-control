@@ -4,7 +4,7 @@ import { closeStore } from './store.js';
 import { logger } from './lib/logger.js';
 
 const server = app.listen(env.port, () => {
-  logger.info(`Maxborder API listening on http://localhost:${env.port} [${env.NODE_ENV}]`);
+  logger.info(`MaxBorder API listening on http://localhost:${env.port} [${env.NODE_ENV}]`);
 });
 
 const shutdown = (signal) => () => {

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
 
-const KEY = 'mb-announcement-dismissed-v1';
+// Bump the version whenever the message changes, so people who closed the
+// last one still see the new one.
+const KEY = 'mb-announcement-dismissed-v2';
 
 /**
  * Dismissal is remembered per browser. Storage access is wrapped because it
@@ -34,13 +37,18 @@ export const AnnouncementBar = () => {
       <div className="flex items-center justify-center gap-2 px-14 py-2.5 text-center">
         <p className="text-[0.78rem] font-500 leading-snug sm:text-[0.8rem]">
           <span className="font-heading font-700 uppercase tracking-[0.12em] text-orange-bright">
-            Season Special
+            Fall Pest Special
           </span>
           <span aria-hidden="true" className="mx-2 opacity-50">
             /
           </span>
-          Free inspection with your first treatment
-          <span className="hidden sm:inline"> — call us for a quote.</span>
+          Rodent Control + Exterior Pest Treatment
+          <Link
+            to="/#fall-specials"
+            className="ml-2 hidden underline underline-offset-4 transition-colors duration-[var(--dur-fast)] hover:text-orange-bright sm:inline"
+          >
+            See the details
+          </Link>
         </p>
 
         <button

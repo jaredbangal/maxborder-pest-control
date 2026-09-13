@@ -17,9 +17,9 @@ export const ServiceCard = ({ service }: { service: Service }) => (
       'hover:shadow-[var(--shadow-lg)]'
     )}
   >
-    {service.popular && (
+    {service.seasonal && (
       <span className="absolute -top-3 left-7 bg-orange px-3 py-1 font-heading text-[0.62rem] font-700 uppercase tracking-[0.16em] text-on-orange">
-        Most popular
+        Seasonal service
       </span>
     )}
 
@@ -37,7 +37,11 @@ export const ServiceCard = ({ service }: { service: Service }) => (
 
     <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-muted">{service.summary}</p>
 
-    <div className="mt-7 flex items-center justify-between border-t border-ink/12 pt-5">
+    <p className="mt-6 font-heading text-[1.05rem] font-800 text-ink">
+      {service.price ?? 'Get a quote'}
+    </p>
+
+    <div className="mt-5 flex items-center justify-between border-t border-ink/12 pt-5">
       <span className="font-heading text-[0.74rem] font-700 uppercase tracking-[0.12em] text-ink">
         Learn more
       </span>
@@ -60,15 +64,15 @@ export const ServicesSection = ({ services }: { services: Service[] }) => (
   <Section id="services" tone="cream">
     <div className="flex flex-wrap items-end justify-between gap-6">
       <SectionHeader
-        eyebrow="What we treat"
+        eyebrow="Our services"
         title={
           <>
-            A plan for every
+            Three services,
             <br />
-            problem on your property.
+            done well.
           </>
         }
-        intro="If it creeps, crawls, bites, or stings, there is a service below built for it — with no surprise callout fees."
+        intro="General pest control, rodent control and seasonal mosquito control for homes and small businesses in Davis and Salt Lake Counties."
       />
     </div>
 

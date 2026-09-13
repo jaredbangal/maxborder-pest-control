@@ -18,8 +18,8 @@ export const leadsRouter = Router();
 leadsRouter.use(writeLimiter);
 
 const SUCCESS = {
-  quote: 'Thanks — your free inspection request is in. We will call within one business hour.',
-  contact: 'Message received. A specialist will reply within one business day.',
+  quote: 'Thanks — your request is in. We will be in touch to talk through your quote.',
+  contact: 'Message received. We will get back to you as soon as we can.',
   callback: 'Got it. Expect a call from our team shortly.',
 };
 
@@ -57,6 +57,11 @@ const handleLead = (kind, schema) =>
       service_slug: body.serviceSlug ?? null,
       property_type: body.propertyType ?? null,
       urgency: body.urgency ?? null,
+      problem: body.problem ?? null,
+      activity_location: body.activityLocation ?? null,
+      preferred_time: body.preferredTime ?? null,
+      pets_children: body.petsChildren ?? null,
+      access_notes: body.accessNotes ?? null,
       message: body.message ?? null,
       source_page: body.sourcePage ?? null,
       ip_hash: hashIp(req.ip),
@@ -74,8 +79,14 @@ const handleLead = (kind, schema) =>
       email: lead.email,
       phone: lead.phone,
       zip: lead.zip,
+      address: lead.address,
       service: lead.service_slug,
-      urgency: lead.urgency,
+      problem: lead.problem,
+      activity: lead.activity_location,
+      preferredTime: lead.preferred_time,
+      propertyType: lead.property_type,
+      petsChildren: lead.pets_children,
+      access: lead.access_notes,
       message: lead.message,
       page: lead.source_page,
     });

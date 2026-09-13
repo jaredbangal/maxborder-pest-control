@@ -1,18 +1,13 @@
 import { createContext, useContext, type ReactNode } from 'react';
 import { api } from './api';
 import { useAsync } from '@/hooks';
-import type { Faq, Pest, PestCategory, Plan, ProcessStep, Service, SiteData, Testimonial } from './types';
+import type { Promotion, Service, SiteData } from './types';
 
 type Bundle = {
   demo?: boolean;
   site: SiteData;
   services: Service[];
-  plans: Plan[];
-  pestCategories: PestCategory[];
-  pests: Pest[];
-  testimonials: Testimonial[];
-  faqs: Faq[];
-  process: { steps: ProcessStep[] };
+  promotions: Promotion[];
 };
 
 const SiteContext = createContext<Bundle | null>(null);
@@ -27,7 +22,7 @@ export const SiteProvider = ({
   fallback: ReactNode;
   errorView: (error: string, retry: () => void) => ReactNode;
 }) => {
-  // One request, not seven. See the /bootstrap route for why.
+  // One request for everything. See the /bootstrap route for why.
   const { data, error, loading, retry } = useAsync<Bundle>((signal) =>
     api.get<Bundle>('/bootstrap', signal)
   );
