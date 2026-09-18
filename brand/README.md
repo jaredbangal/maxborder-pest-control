@@ -32,7 +32,7 @@ Everything the site serves lives in `client/public/`:
 | `brand/maxborder-on-light.svg`        | Light-mode drawer and loaders, noscript fallback            |
 | `brand/maxborder-mark-on-dark.svg`    | Mark only, for dark grounds                                 |
 | `brand/maxborder-mark-on-light.svg`   | Mark only, for light grounds                                |
-| `favicon.svg`                         | Browser tab: mark on a rounded navy tile                    |
+| `favicon.svg`                         | Browser tab: mark alone, edge to edge, no tile; outline goes navy on light tabs, cream on dark |
 | `apple-touch-icon.png`                | iOS home screen (180×180, full-bleed navy)                  |
 | `og-image.png`                        | Link previews on social apps and messages (1200×630)        |
 
