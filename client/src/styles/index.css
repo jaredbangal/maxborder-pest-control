@@ -43,6 +43,13 @@
      to give away. */
   --color-hero: #ffffff;
   --color-on-hero: #c2410c;
+  --color-hero-body: #111111; /* hero description — 18.9:1 on white */
+
+  /* Hero trust icons, one colour each so they read as distinct marks.
+     Icons need 3:1; all three clear 4.5:1 on the white hero. */
+  --color-icon-blue: #1d4ed8; /* licensed — 6.70:1 */
+  --color-icon-green: #15803d; /* insured — 5.02:1 */
+  --color-icon-red: #dc2626; /* service area — 4.83:1 */
 
 /* --- Semantic --- */
   /* Alpha floors, computed against #12203a and #faf6ec respectively:
@@ -90,63 +97,33 @@
    Same token names, different values — every component picks up
    the change without knowing a theme system exists.
 
-   Three selectors, on purpose:
-     1. system preference, when the user has made no explicit choice
-     2. explicit data-theme="dark"
-   The :not([data-theme='light']) guard lets an explicit light
-   choice win over a dark OS setting.
+   Day mode is the default for every visitor. Night mode applies only
+   when they choose it with the toggle (data-theme="dark"); the OS
+   dark setting deliberately does not switch it.
    Ratios measured against the dark grounds, all AA or better.
    ============================================================ */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --color-cream: #0e1720; /* page ground */
-    --color-paper: #18232f; /* raised cards */
-    --color-sand: #141d28; /* recessed bands */
-    --color-ink: #ede7da; /* primary text — 14.5:1 on page */
-    --color-ink-2: #ddd5c6;
-    --color-muted: #a8b0bd; /* 7.4:1 on paper */
-
-    --color-orange: #e8823a; /* 6.55:1 on page · 5.95:1 on paper */
-    --color-orange-deep: #f09a4e; /* hover lightens in dark */
-    --color-orange-tint: #2b1b10;
-    --color-orange-bright: #e8823a;
-    --color-on-orange: #1a1005; /* 6.86:1 on the lightened orange */
-
-    --color-inverse: #1e2c3c;
-    --color-on-inverse: #ede7da;
-    --color-hero: #0e1720; /* a white panel would glare at night */
-    --color-on-hero: #e8823a; /* 6.61:1 on that ground */
-
-    --color-success: #5fd09b;
-    --color-warning: #e0a548;
-    --color-danger: #ef7e77; /* 6.75:1 on page */
-    --color-danger-tint: #2a1614;
-
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 16px -4px rgba(0, 0, 0, 0.55);
-    --shadow-lg: 0 18px 48px -12px rgba(0, 0, 0, 0.7);
-    --shadow-orange: 0 12px 32px -10px rgba(232, 130, 58, 0.35);
-  }
-}
-
 :root[data-theme='dark'] {
-  --color-cream: #0e1720;
-  --color-paper: #18232f;
-  --color-sand: #141d28;
-  --color-ink: #ede7da;
+  --color-cream: #0e1720; /* page ground */
+  --color-paper: #18232f; /* raised cards */
+  --color-sand: #141d28; /* recessed bands */
+  --color-ink: #ede7da; /* primary text — 14.5:1 on page */
   --color-ink-2: #ddd5c6;
-  --color-muted: #a8b0bd;
+  --color-muted: #a8b0bd; /* 7.4:1 on paper */
 
-  --color-orange: #e8823a;
-  --color-orange-deep: #f09a4e;
+  --color-orange: #e8823a; /* 6.55:1 on page · 5.95:1 on paper */
+  --color-orange-deep: #f09a4e; /* hover lightens in dark */
   --color-orange-tint: #2b1b10;
   --color-orange-bright: #e8823a;
-  --color-on-orange: #1a1005;
+  --color-on-orange: #1a1005; /* 6.86:1 on the lightened orange */
 
   --color-inverse: #1e2c3c;
   --color-on-inverse: #ede7da;
-  --color-hero: #0e1720;
-  --color-on-hero: #e8823a;
+  --color-hero: #0e1720; /* a white panel would glare at night */
+  --color-on-hero: #e8823a; /* 6.61:1 on that ground */
+  --color-hero-body: #ede7da; /* black copy would vanish on the night hero */
+  --color-icon-blue: #60a5fa;
+  --color-icon-green: #4ade80;
+  --color-icon-red: #f87171;
 
   --color-success: #5fd09b;
   --color-warning: #e0a548;
@@ -161,12 +138,6 @@
 
 /* The paper grain is a multiply blend — it turns into a black smear on dark
    surfaces. Screen at low opacity keeps a hint of tooth instead. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .grain::before {
-    mix-blend-mode: screen;
-    opacity: 0.16;
-  }
-}
 :root[data-theme='dark'] .grain::before {
   mix-blend-mode: screen;
   opacity: 0.16;
@@ -348,15 +319,6 @@
 @layer components {
   .logo-on-dark-ground {
     display: none;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .logo-on-light-ground {
-      display: none;
-    }
-    :root:not([data-theme='light']) .logo-on-dark-ground {
-      display: block;
-    }
   }
 
   :root[data-theme='dark'] .logo-on-light-ground {

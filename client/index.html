@@ -30,24 +30,17 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <script>
-      // Runs before first paint. Reads the saved choice (or falls back to the
-      // OS setting) and stamps <html> so the correct palette is already in
-      // place when the page renders — no flash of the wrong theme.
+      // Runs before first paint. Day mode is the default; night mode only if
+      // the visitor chose it with the toggle. Stamping <html> here means the
+      // right palette is in place when the page renders — no flash.
       (function () {
         try {
-          var saved = localStorage.getItem('mb-theme');
-          var dark =
-            saved === 'dark' ||
-            (saved !== 'light' &&
-              window.matchMedia('(prefers-color-scheme: dark)').matches);
-          if (saved === 'light' || saved === 'dark') {
-            document.documentElement.setAttribute('data-theme', saved);
+          if (localStorage.getItem('mb-theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0e1720');
           }
-          document
-            .querySelector('meta[name="theme-color"]')
-            .setAttribute('content', dark ? '#0e1720' : '#f4eee0');
         } catch (e) {
-          /* storage blocked — fall through to the media query */
+          /* storage blocked — stay in day mode */
         }
       })();
     </script>
@@ -86,10 +79,7 @@
          things they came for: the phone number and the address. -->
     <noscript>
       <div style="max-width:34rem;margin:4rem auto;padding:0 1.5rem;font-family:Karla,system-ui,sans-serif;color:#12203a">
-        <picture>
-          <source srcset="/brand/maxborder-on-dark.svg" media="(prefers-color-scheme: dark)" />
-          <img src="/brand/maxborder-on-light.svg" alt="MaxBorder Pest Control" width="260" height="59" style="display:block;margin:0 0 2rem" />
-        </picture>
+        <img src="/brand/maxborder-on-light.svg" alt="MaxBorder Pest Control" width="260" height="59" style="display:block;margin:0 0 2rem" />
         <h1 style="font-family:'Archivo Black',sans-serif;font-size:2rem;line-height:1.1;margin:0 0 1rem">
           Pests stop at the border.
         </h1>

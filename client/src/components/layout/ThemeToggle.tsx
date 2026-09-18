@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/cn';
-import { applyTheme, readTheme, systemTheme, type Theme } from '@/lib/theme';
+import { applyTheme, readTheme, storeTheme, type Theme } from '@/lib/theme';
 
 /**
  * Day/night switch.
@@ -12,8 +12,8 @@ import { applyTheme, readTheme, systemTheme, type Theme } from '@/lib/theme';
  * it read as decoration rather than a control.
  *
  * Starts from whatever the pre-paint script in index.html already applied, so
- * the button never contradicts what is on screen. While the user is on
- * 'system', it keeps following the OS live.
+ * the button never contradicts what is on screen. Day mode unless the visitor
+ * has chosen night mode here.
  */
 export const ThemeToggle = ({
   className,
@@ -24,18 +24,7 @@ export const ThemeToggle = ({
   tone?: 'default' | 'inverse';
   showLabel?: boolean;
 }) => {
-  const [theme, setTheme] = useState<Theme>(() => readTheme());
-  const [effective, setEffective] = useState<'light' | 'dark'>(() =>
-    readTheme() === 'system' ? systemTheme() : (readTheme() as 'light' | 'dark')
-  );
-
-  useEffect(() => {
-    if (theme !== 'system') return;
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const onChange = () => setEffective(applyTheme('system'));
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, [theme]);
+  const [effective, setEffective] = useState<Theme>(readTheme);
 
   const toggle = () => {
     const next: Theme = effective === 'dark' ? 'light' : 'dark';
@@ -48,13 +37,8 @@ export const ThemeToggle = ({
       window.setTimeout(() => root.classList.remove('theme-transition'), 360);
     }
 
-    setTheme(next);
     setEffective(applyTheme(next));
-    try {
-      localStorage.setItem('mb-theme', next);
-    } catch {
-      /* storage blocked */
-    }
+    storeTheme(next);
   };
 
   const isDark = effective === 'dark';

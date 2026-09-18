@@ -6,9 +6,9 @@ import { PerimeterGraphic } from './PerimeterGraphic';
 import { PHONE, PHONE_HREF } from '@/lib/constants';
 
 const TRUST_POINTS = [
-  { Icon: BadgeCheck, label: 'Licensed Utah Pest Control Business' },
-  { Icon: ShieldCheck, label: 'Insured' },
-  { Icon: MapPin, label: 'Serving Davis & Salt Lake Counties' },
+  { Icon: BadgeCheck, label: 'Licensed Utah Pest Control Business', color: 'text-icon-blue' },
+  { Icon: ShieldCheck, label: 'Insured', color: 'text-icon-green' },
+  { Icon: MapPin, label: 'Serving Davis & Salt Lake Counties', color: 'text-icon-red' },
 ];
 
 export const Hero = () => (
@@ -55,7 +55,7 @@ export const Hero = () => (
           </Reveal>
 
           <Reveal delay={180}>
-            <p className="mt-8 max-w-xl text-[1.0625rem] leading-relaxed text-on-hero sm:text-[1.15rem]">
+            <p className="mt-8 max-w-xl text-[1.0625rem] leading-relaxed text-hero-body sm:text-[1.15rem]">
               Straightforward pest control for homes and small businesses in Davis and Salt Lake
               Counties. We focus on practical treatments for common household pests, rodents, and
               mosquitoes.
@@ -86,9 +86,9 @@ export const Hero = () => (
 
           <Reveal delay={420}>
             <ul className="mt-10 flex flex-wrap gap-x-7 gap-y-3">
-              {TRUST_POINTS.map(({ Icon, label }) => (
+              {TRUST_POINTS.map(({ Icon, label, color }) => (
                 <li key={label} className="flex items-center gap-2 text-[0.85rem] text-on-hero">
-                  <Icon className="size-4 shrink-0 text-on-hero" strokeWidth={2} aria-hidden="true" />
+                  <Icon className={`size-4 shrink-0 ${color}`} strokeWidth={2} aria-hidden="true" />
                   {label}
                 </li>
               ))}
