@@ -11,9 +11,9 @@
   },
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [{ "type": "host", "value": "www.maxborder.com" }],
-      "destination": "https://maxborder.com/:path*",
+      "destination": "https://maxborder.com/$1",
       "permanent": true
     }
   ],
